@@ -3,7 +3,7 @@ from django.db import models
 
 class Tender(models.Model):
     title = models.CharField(max_length=100)
-    main_text = models.TextField()
+    description = models.TextField()
     date = models.DateField()
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -9,7 +9,7 @@ class TenderSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "title",
-            "main_text",
+            "description",
             "date",
             "is_active",
         )
