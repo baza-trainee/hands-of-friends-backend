@@ -1,5 +1,6 @@
 from django.db import models
 
+from content_management.validators import validate_image
 from content_management.upload_to_path import UploadToPath
 
 
@@ -20,7 +21,9 @@ class Tender(models.Model):
 
 class Project(models.Model):
     title = models.CharField()
-    image = models.ImageField(upload_to=UploadToPath("project-images/"))
+    image = models.ImageField(
+        upload_to=UploadToPath("project-images/"), validators=[validate_image]
+    )
     description = models.TextField()
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
