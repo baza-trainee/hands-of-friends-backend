@@ -20,10 +20,10 @@ class Tender(models.Model):
 
 
 class Project(models.Model):
-    title = models.CharField()
     image = models.ImageField(
         upload_to=UploadToPath("project-images/"), validators=[validate_image]
     )
+    title = models.CharField()
     description = models.TextField()
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)

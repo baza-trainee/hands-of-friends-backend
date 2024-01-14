@@ -1,3 +1,5 @@
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework import mixins
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.viewsets import GenericViewSet
@@ -11,6 +13,18 @@ class TenderPagination(PageNumberPagination):
     max_page_size = 100
 
 
+@extend_schema(
+    parameters=[
+        OpenApiParameter(
+            name="Accept-Language",
+            type=OpenApiTypes.STR,
+            location=OpenApiParameter.HEADER,
+            required=False,
+            description="Language code to get the content in a specific language (e.g., en, uk)",
+            enum=["en", "uk"],
+        ),
+    ]
+)
 class TenderViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericViewSet):
     queryset = Tender.objects.all()
     serializer_class = TenderSerializer
@@ -25,12 +39,36 @@ class TenderViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVie
 
         return queryset
 
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                "is_active",
+                type=OpenApiTypes.STR,
+                description="Filter by is_active field true, false (ex. ?is_active=true)",
+            )
+        ]
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
 
 class ProjectPagination(PageNumberPagination):
     page_size = 3
     max_page_size = 100
 
 
+@extend_schema(
+    parameters=[
+        OpenApiParameter(
+            name="Accept-Language",
+            type=OpenApiTypes.STR,
+            location=OpenApiParameter.HEADER,
+            required=False,
+            description="Language code to get the content in a specific language (e.g., en, uk)",
+            enum=["en", "uk"],
+        ),
+    ]
+)
 class ProjectViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
@@ -44,3 +82,15 @@ class ProjectViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVi
             queryset = queryset.filter(is_active=True if is_active == "true" else False)
 
         return queryset
+
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                "is_active",
+                type=OpenApiTypes.STR,
+                description="Filter by is_active field true, false (ex. ?is_active=true)",
+            )
+        ]
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
