@@ -31,6 +31,11 @@ DEBUG = os.environ.get("DJANGO_DEBUG", "") == "True"
 
 ALLOWED_HOSTS = []
 
+# Adding Render hostname to allowed hosts
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
