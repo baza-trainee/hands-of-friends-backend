@@ -178,7 +178,10 @@ SPECTACULAR_SETTINGS = {
 }
 
 # CORS
-CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
+
+# TODO: Change to specific origins
+# CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Cloudinary config
 CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL")
