@@ -13,9 +13,20 @@ from content_management.serializers import (
 )
 
 
-class TenderPagination(PageNumberPagination):
-    page_size = 9
+class BasePagination(PageNumberPagination):
     max_page_size = 100
+
+
+class TenderPagination(BasePagination):
+    page_size = 9
+
+
+class ProjectPagination(BasePagination):
+    page_size = 3
+
+
+class TeamMemberPagination(BasePagination):
+    page_size = 4
 
 
 @extend_schema(
@@ -55,11 +66,6 @@ class TenderViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVie
     )
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
-
-
-class ProjectPagination(PageNumberPagination):
-    page_size = 3
-    max_page_size = 100
 
 
 @extend_schema(
@@ -116,6 +122,7 @@ class ProjectViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVi
 class TeamMemberViewSet(mixins.ListModelMixin, GenericViewSet):
     queryset = TeamMember.objects.all()
     serializer_class = TeamMemberSerializer
+    pagination_class = TeamMemberPagination
 
 
 class PartnerLogoViewSet(mixins.ListModelMixin, GenericViewSet):
