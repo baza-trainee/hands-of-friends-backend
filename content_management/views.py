@@ -4,8 +4,12 @@ from rest_framework import mixins
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.viewsets import GenericViewSet
 
-from content_management.models import Tender, Project
-from content_management.serializers import TenderSerializer, ProjectSerializer
+from content_management.models import Tender, Project, TeamMember
+from content_management.serializers import (
+    TenderSerializer,
+    ProjectSerializer,
+    TeamMemberSerializer,
+)
 
 
 class TenderPagination(PageNumberPagination):
@@ -94,3 +98,20 @@ class ProjectViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVi
     )
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
+
+
+@extend_schema(
+    parameters=[
+        OpenApiParameter(
+            name="Accept-Language",
+            type=OpenApiTypes.STR,
+            location=OpenApiParameter.HEADER,
+            required=False,
+            description="Language code to get the content in a specific language (e.g., en, uk)",
+            enum=["en", "uk"],
+        )
+    ]
+)
+class TeamMemberViewSet(mixins.ListModelMixin, GenericViewSet):
+    queryset = TeamMember.objects.all()
+    serializer_class = TeamMemberSerializer

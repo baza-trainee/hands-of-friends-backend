@@ -35,3 +35,20 @@ class Project(models.Model):
 
     def __str__(self):
         return f"{self.title}"
+
+
+class TeamMember(models.Model):
+    image = models.ImageField(
+        upload_to=UploadToPath("team-members/"), validators=[validate_image]
+    )
+    full_name = models.CharField(max_length=255)
+    position = models.CharField(max_length=255)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-added_at"]
+        verbose_name_plural = "team members"
+        verbose_name = "team member"
+
+    def __str__(self):
+        return f"{self.full_name} [{self.position}]"
