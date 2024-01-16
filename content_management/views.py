@@ -51,7 +51,9 @@ class TenderViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVie
         is_active = self.request.query_params.get("is_active", None)
 
         if is_active is not None:
-            queryset = queryset.filter(is_active=True if is_active == "true" else False)
+            queryset = queryset.filter(
+                is_active=True if is_active.lower() == "true" else False
+            )
 
         return queryset
 
@@ -90,7 +92,9 @@ class ProjectViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVi
         is_active = self.request.query_params.get("is_active", None)
 
         if is_active is not None:
-            queryset = queryset.filter(is_active=True if is_active == "true" else False)
+            queryset = queryset.filter(
+                is_active=True if is_active.lower() == "true" else False
+            )
 
         return queryset
 
