@@ -1,7 +1,7 @@
 from django.db import models
 
+from content_management.upload_to_path import UploadToPath
 from content_management.validators import validate_image
-from cloudinary.models import CloudinaryField
 
 
 class Tender(models.Model):
@@ -20,7 +20,10 @@ class Tender(models.Model):
 
 
 class Project(models.Model):
-    image = CloudinaryField("image", validators=[validate_image])
+    image = models.ImageField(
+        upload_to=UploadToPath("projects/"),
+        validators=[validate_image],
+    )
     title = models.CharField()
     description = models.TextField()
     is_active = models.BooleanField(default=True)
@@ -32,3 +35,35 @@ class Project(models.Model):
 
     def __str__(self):
         return f"{self.title}"
+
+
+class TeamMember(models.Model):
+    image = models.ImageField(
+        upload_to=UploadToPath("team-members/"), validators=[validate_image]
+    )
+    full_name = models.CharField(max_length=255)
+    position = models.CharField(max_length=255)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-added_at"]
+        verbose_name_plural = "team members"
+        verbose_name = "team member"
+
+    def __str__(self):
+        return f"{self.full_name} [{self.position}]"
+
+
+class PartnerLogo(models.Model):
+    image = models.ImageField(
+        upload_to=UploadToPath("partner-logos/"), validators=[validate_image]
+    )
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-added_at"]
+        verbose_name_plural = "partner logos"
+        verbose_name = "partner logo"
+
+    def __str__(self):
+        return f"Partner logo {self.added_at}"

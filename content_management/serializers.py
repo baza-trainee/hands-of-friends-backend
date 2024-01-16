@@ -1,7 +1,6 @@
 from rest_framework import serializers
-from cloudinary.utils import cloudinary_url
 
-from content_management.models import Tender, Project
+from content_management.models import Tender, Project, TeamMember, PartnerLogo
 
 
 class TenderSerializer(serializers.ModelSerializer):
@@ -17,8 +16,6 @@ class TenderSerializer(serializers.ModelSerializer):
 
 
 class ProjectSerializer(serializers.ModelSerializer):
-    image = serializers.SerializerMethodField()
-
     class Meta:
         model = Project
         fields = (
@@ -29,9 +26,22 @@ class ProjectSerializer(serializers.ModelSerializer):
             "is_active",
         )
 
-    def get_image(self, obj):
-        if obj.image:
-            public_id = obj.image.public_id
-            url, options = cloudinary_url(public_id)
-            return url
-        return None
+
+class TeamMemberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TeamMember
+        fields = (
+            "id",
+            "image",
+            "full_name",
+            "position",
+        )
+
+
+class PartnerLogoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartnerLogo
+        fields = (
+            "id",
+            "image",
+        )

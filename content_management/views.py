@@ -4,13 +4,29 @@ from rest_framework import mixins
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.viewsets import GenericViewSet
 
-from content_management.models import Tender, Project
-from content_management.serializers import TenderSerializer, ProjectSerializer
+from content_management.models import Tender, Project, TeamMember, PartnerLogo
+from content_management.serializers import (
+    TenderSerializer,
+    ProjectSerializer,
+    TeamMemberSerializer,
+    PartnerLogoSerializer,
+)
 
 
-class TenderPagination(PageNumberPagination):
-    page_size = 9
+class BasePagination(PageNumberPagination):
     max_page_size = 100
+
+
+class TenderPagination(BasePagination):
+    page_size = 9
+
+
+class ProjectPagination(BasePagination):
+    page_size = 3
+
+
+class TeamMemberPagination(BasePagination):
+    page_size = 4
 
 
 @extend_schema(
@@ -52,11 +68,6 @@ class TenderViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVie
         return super().list(request, *args, **kwargs)
 
 
-class ProjectPagination(PageNumberPagination):
-    page_size = 3
-    max_page_size = 100
-
-
 @extend_schema(
     parameters=[
         OpenApiParameter(
@@ -94,3 +105,26 @@ class ProjectViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVi
     )
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
+
+
+@extend_schema(
+    parameters=[
+        OpenApiParameter(
+            name="Accept-Language",
+            type=OpenApiTypes.STR,
+            location=OpenApiParameter.HEADER,
+            required=False,
+            description="Language code to get the content in a specific language (e.g., en, uk)",
+            enum=["en", "uk"],
+        )
+    ]
+)
+class TeamMemberViewSet(mixins.ListModelMixin, GenericViewSet):
+    queryset = TeamMember.objects.all()
+    serializer_class = TeamMemberSerializer
+    pagination_class = TeamMemberPagination
+
+
+class PartnerLogoViewSet(mixins.ListModelMixin, GenericViewSet):
+    queryset = PartnerLogo.objects.all()
+    serializer_class = PartnerLogoSerializer
