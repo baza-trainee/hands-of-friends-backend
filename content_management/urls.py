@@ -1,11 +1,17 @@
 from rest_framework import routers
 
-from content_management.views import TenderViewSet, ProjectViewSet, TeamMemberViewSet
+from content_management.views import (
+    TenderViewSet,
+    ProjectViewSet,
+    TeamMemberViewSet,
+    PartnerLogoViewSet,
+)
 
 router = routers.DefaultRouter()
 router.register("tenders", TenderViewSet)
 router.register("projects", ProjectViewSet)
 router.register("team", TeamMemberViewSet)
+router.register("partner", PartnerLogoViewSet)
 
 urlpatterns = router.urls
 

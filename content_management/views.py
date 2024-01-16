@@ -115,3 +115,8 @@ class ProjectViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVi
 class TeamMemberViewSet(mixins.ListModelMixin, GenericViewSet):
     queryset = TeamMember.objects.all()
     serializer_class = TeamMemberSerializer
+
+
+class PartnerLogoViewSet(mixins.ListModelMixin, GenericViewSet):
+    queryset = TeamMember.objects.all()
+    serializer_class = TeamMemberSerializer

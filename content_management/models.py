@@ -52,3 +52,18 @@ class TeamMember(models.Model):
 
     def __str__(self):
         return f"{self.full_name} [{self.position}]"
+
+
+class PartnerLogo(models.Model):
+    image = models.ImageField(
+        upload_to=UploadToPath("partner-logos/"), validators=[validate_image]
+    )
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-added_at"]
+        verbose_name_plural = "partner logos"
+        verbose_name = "partner logo"
+
+    def __str__(self):
+        return f"Partner logo {self.added_at}"

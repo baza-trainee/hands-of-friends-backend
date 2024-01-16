@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from content_management.models import Tender, Project, TeamMember
+from content_management.models import Tender, Project, TeamMember, PartnerLogo
 
 
 class TenderSerializer(serializers.ModelSerializer):
@@ -35,4 +35,13 @@ class TeamMemberSerializer(serializers.ModelSerializer):
             "image",
             "full_name",
             "position",
+        )
+
+
+class PartnerLogoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartnerLogo
+        fields = (
+            "id",
+            "image",
         )
