@@ -43,7 +43,6 @@ POSTGRES_PASSWORD=<your db user password>
 DJANGO_SECRET_KEY=<your secret key>
 DJANGO_DEBUG=<True or False>
 CORS_ALLOWED_ORIGINS=<your frontend url>,<your frontend url>
-CLOUDINARY_URL=<your cloudinary url>
 ```
 
 ```shell
@@ -83,6 +82,4 @@ add, edit and delete content.
 - PostgreSQL
 - Docker
 - Swagger
-- Cloudinary
 - Render
-- 

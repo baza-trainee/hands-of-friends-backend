@@ -1,7 +1,7 @@
 from django.db import models
 
+from content_management.upload_to_path import UploadToPath
 from content_management.validators import validate_image
-from cloudinary.models import CloudinaryField
 
 
 class Tender(models.Model):
@@ -20,7 +20,10 @@ class Tender(models.Model):
 
 
 class Project(models.Model):
-    image = CloudinaryField("image", validators=[validate_image])
+    image = models.ImageField(
+        upload_to=UploadToPath("projects/"),
+        validators=[validate_image],
+    )
     title = models.CharField()
     description = models.TextField()
     is_active = models.BooleanField(default=True)
