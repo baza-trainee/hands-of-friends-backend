@@ -11,7 +11,7 @@ router = routers.DefaultRouter()
 router.register("tenders", TenderViewSet)
 router.register("projects", ProjectViewSet)
 router.register("team", TeamMemberViewSet)
-router.register("partner", PartnerLogoViewSet)
+router.register("partners", PartnerLogoViewSet)
 
 urlpatterns = router.urls
 

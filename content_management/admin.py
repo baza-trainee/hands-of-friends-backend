@@ -45,7 +45,3 @@ class PartnerLogoAdmin(admin.ModelAdmin, ImageAdminMixin):
         "image_tag",
     )
     search_fields = ("id",)
-
-# admin.site.register(TeamMember, TeamMemberAdmin)
-# admin.site.register(Project, ProjectAdmin)
-# admin.site.register(PartnerLogo, PartnerLogoAdmin)

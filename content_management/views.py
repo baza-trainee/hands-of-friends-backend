@@ -4,11 +4,12 @@ from rest_framework import mixins
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.viewsets import GenericViewSet
 
-from content_management.models import Tender, Project, TeamMember
+from content_management.models import Tender, Project, TeamMember, PartnerLogo
 from content_management.serializers import (
     TenderSerializer,
     ProjectSerializer,
     TeamMemberSerializer,
+    PartnerLogoSerializer,
 )
 
 
@@ -118,5 +119,5 @@ class TeamMemberViewSet(mixins.ListModelMixin, GenericViewSet):
 
 
 class PartnerLogoViewSet(mixins.ListModelMixin, GenericViewSet):
-    queryset = TeamMember.objects.all()
-    serializer_class = TeamMemberSerializer
+    queryset = PartnerLogo.objects.all()
+    serializer_class = PartnerLogoSerializer
