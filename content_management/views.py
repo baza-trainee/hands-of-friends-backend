@@ -25,10 +25,6 @@ class ProjectPagination(BasePagination):
     page_size = 3
 
 
-class TeamMemberPagination(BasePagination):
-    page_size = 4
-
-
 @extend_schema(
     parameters=[
         OpenApiParameter(
@@ -126,7 +122,6 @@ class ProjectViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVi
 class TeamMemberViewSet(mixins.ListModelMixin, GenericViewSet):
     queryset = TeamMember.objects.all()
     serializer_class = TeamMemberSerializer
-    pagination_class = TeamMemberPagination
 
 
 class PartnerLogoViewSet(mixins.ListModelMixin, GenericViewSet):
