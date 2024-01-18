@@ -25,10 +25,6 @@ class ProjectPagination(BasePagination):
     page_size = 3
 
 
-class TeamMemberPagination(BasePagination):
-    page_size = 4
-
-
 @extend_schema(
     parameters=[
         OpenApiParameter(
@@ -51,7 +47,9 @@ class TenderViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVie
         is_active = self.request.query_params.get("is_active", None)
 
         if is_active is not None:
-            queryset = queryset.filter(is_active=True if is_active == "true" else False)
+            queryset = queryset.filter(
+                is_active=True if is_active.lower() == "true" else False
+            )
 
         return queryset
 
@@ -80,7 +78,7 @@ class TenderViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVie
         ),
     ]
 )
-class ProjectViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericViewSet):
+class ProjectViewSet(mixins.ListModelMixin, GenericViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     pagination_class = ProjectPagination
@@ -90,7 +88,9 @@ class ProjectViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVi
         is_active = self.request.query_params.get("is_active", None)
 
         if is_active is not None:
-            queryset = queryset.filter(is_active=True if is_active == "true" else False)
+            queryset = queryset.filter(
+                is_active=True if is_active.lower() == "true" else False
+            )
 
         return queryset
 
@@ -122,7 +122,6 @@ class ProjectViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVi
 class TeamMemberViewSet(mixins.ListModelMixin, GenericViewSet):
     queryset = TeamMember.objects.all()
     serializer_class = TeamMemberSerializer
-    pagination_class = TeamMemberPagination
 
 
 class PartnerLogoViewSet(mixins.ListModelMixin, GenericViewSet):

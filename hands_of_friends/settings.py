@@ -50,11 +50,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_cleanup.apps.CleanupConfig",
     "rest_framework",
     "drf_spectacular",
     "corsheaders",
-    "cloudinary",
-    "cloudinary_storage",
     "user",
     "content_management",
 ]
