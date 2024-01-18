@@ -54,8 +54,6 @@ INSTALLED_APPS = [
     "rest_framework",
     "drf_spectacular",
     "corsheaders",
-    "cloudinary",
-    "cloudinary_storage",
     "user",
     "content_management",
 ]
