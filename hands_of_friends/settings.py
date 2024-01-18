@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "user",
     "content_management",
+    "django_cleanup.apps.CleanupConfig", #
 ]
 
 MIDDLEWARE = [
