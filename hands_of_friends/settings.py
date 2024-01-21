@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "drf_spectacular",
     "corsheaders",
+    "ckeditor",
     "user",
     "content_management",
     "django_cleanup.apps.CleanupConfig",  # Must be the last one in the list
@@ -178,3 +179,81 @@ SPECTACULAR_SETTINGS = {
 # TODO: Change to specific origins in production
 # CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
 CORS_ALLOW_ALL_ORIGINS = True
+
+# CKEditor
+CKEDITOR_CONFIGS = {
+    "default": {
+        "skin": "moono",
+        "toolbar_Basic": [["Source", "-", "Bold", "Italic"]],
+        "toolbar_CustomToolbarConfig": [
+            {"name": "document", "items": ["Source", "-", "Save"]},
+            {
+                "name": "clipboard",
+                "items": [
+                    "Cut",
+                    "Copy",
+                    "Paste",
+                    "PasteText",
+                    "PasteFromWord",
+                    "-",
+                    "Undo",
+                    "Redo",
+                ],
+            },
+            {
+                "name": "basicstyles",
+                "items": [
+                    "Bold",
+                    "Italic",
+                    "Underline",
+                    "Strike",
+                    "Subscript",
+                    "Superscript",
+                    "-",
+                    "RemoveFormat",
+                ],
+            },
+            {
+                "name": "paragraph",
+                "items": [
+                    "NumberedList",
+                    "BulletedList",
+                    "-",
+                    "Outdent",
+                    "Indent",
+                    "-",
+                    "Blockquote",
+                    "CreateDiv",
+                    "-",
+                    "JustifyLeft",
+                    "JustifyCenter",
+                    "JustifyRight",
+                    "JustifyBlock",
+                ],
+            },
+            {"name": "links", "items": ["Link", "Unlink"]},
+            {"name": "styles", "items": ["Styles", "Format", "Font", "FontSize"]},
+            {"name": "colors", "items": ["TextColor", "BGColor"]},
+            {"name": "tools", "items": ["Maximize", "ShowBlocks"]},
+        ],
+        "toolbar": "CustomToolbarConfig",
+        "height": 291,
+        "width": "100%",
+        "filebrowserWindowWidth": "100%",
+        "extraPlugins": ",".join(
+            [
+                "div",
+                "autolink",
+                "autoembed",
+                "embedsemantic",
+                "autogrow",
+                "widget",
+                "lineutils",
+                "clipboard",
+                "dialog",
+                "dialogui",
+                "elementspath",
+            ]
+        ),
+    }
+}

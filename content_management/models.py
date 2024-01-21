@@ -3,11 +3,12 @@ from django.db import models
 
 from content_management.upload_to_path import UploadToPath
 from content_management.validators import validate_image
+from ckeditor.fields import RichTextField
 
 
 class Tender(models.Model):
     title = models.CharField()
-    description = models.TextField()
+    description = RichTextField()
     date = models.DateField()
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -65,7 +66,7 @@ class TeamMember(models.Model):
             raise ValidationError({"image": e})
 
     def save(
-            self, force_insert=False, force_update=False, using=None, update_fields=None
+        self, force_insert=False, force_update=False, using=None, update_fields=None
     ):
         self.full_clean()
         super().save(force_insert, force_update, using, update_fields)
