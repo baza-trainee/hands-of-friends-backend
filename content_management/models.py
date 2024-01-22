@@ -39,7 +39,7 @@ class Project(models.Model):
             raise ValidationError({"image": e})
 
     def save(
-            self, force_insert=False, force_update=False, using=None, update_fields=None
+        self, force_insert=False, force_update=False, using=None, update_fields=None
     ):
         self.full_clean()
         super().save(force_insert, force_update, using, update_fields)
@@ -92,10 +92,38 @@ class PartnerLogo(models.Model):
             raise ValidationError({"image": e})
 
     def save(
-            self, force_insert=False, force_update=False, using=None, update_fields=None
+        self, force_insert=False, force_update=False, using=None, update_fields=None
     ):
         self.full_clean()
         super().save(force_insert, force_update, using, update_fields)
 
     def __str__(self):
         return f"{self.company_name} logo"
+
+
+class News(models.Model):
+    image = models.FileField(upload_to=UploadToPath("news/"))
+    date = models.DateField()
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    link_to_news = models.URLField()
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-date"]
+        verbose_name_plural = "news"
+
+    def clean(self):
+        try:
+            validate_image(self.image)
+        except ValidationError as e:
+            raise ValidationError({"image": e})
+
+    def save(
+        self, force_insert=False, force_update=False, using=None, update_fields=None
+    ):
+        self.full_clean()
+        super().save(force_insert, force_update, using, update_fields)
+
+    def __str__(self):
+        return f"{self.title}"

@@ -4,12 +4,13 @@ from rest_framework import mixins
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.viewsets import GenericViewSet
 
-from content_management.models import Tender, Project, TeamMember, PartnerLogo
+from content_management.models import Tender, Project, TeamMember, PartnerLogo, News
 from content_management.serializers import (
     TenderSerializer,
     ProjectSerializer,
     TeamMemberSerializer,
     PartnerLogoSerializer,
+    NewsSerializer,
 )
 
 
@@ -23,9 +24,7 @@ class TenderPagination(BasePagination):
 
 class ProjectPagination(PageNumberPagination):
     max_page_size = 100
-    page_size_query_param = (
-        "limit"
-    )
+    page_size_query_param = "limit"
 
     def get_page_size(self, request):
         limit = request.query_params.get(self.page_size_query_param)
@@ -144,3 +143,8 @@ class TeamMemberViewSet(mixins.ListModelMixin, GenericViewSet):
 class PartnerLogoViewSet(mixins.ListModelMixin, GenericViewSet):
     queryset = PartnerLogo.objects.all()
     serializer_class = PartnerLogoSerializer
+
+
+class NewsViewSet(mixins.ListModelMixin, GenericViewSet):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
