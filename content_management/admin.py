@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import mark_safe
 from modeltranslation.admin import TranslationAdmin
 
-from content_management.models import Tender, Project, TeamMember, PartnerLogo
+from content_management.models import Tender, Project, TeamMember, PartnerLogo, News
 
 
 class ImageAdminMixin:
@@ -45,3 +45,11 @@ class PartnerLogoAdmin(admin.ModelAdmin, ImageAdminMixin):
         "image_tag",
     )
     search_fields = ("company_name",)
+
+
+@admin.register(News)
+class NewsAdmin(TranslationAdmin, ImageAdminMixin):
+    list_display = ("title", "date", "image_tag")
+    list_filter = ("title", "date")
+    search_fields = ("title", "date")
+    group_fieldsets = True
