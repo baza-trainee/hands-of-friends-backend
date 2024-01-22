@@ -1,5 +1,5 @@
 from modeltranslation.translator import register, TranslationOptions
-from content_management.models import Tender, Project, TeamMember, News
+from content_management.models import Tender, Project, TeamMember, News, Contacts
 
 
 @register(Tender)
@@ -20,3 +20,8 @@ class TeamMemberTranslationOptions(TranslationOptions):
 @register(News)
 class NewsTranslationOptions(TranslationOptions):
     fields = ("title", "description")
+
+
+@register(Contacts)
+class ContactsTranslationOptions(TranslationOptions):
+    fields = ("address",)
