@@ -51,7 +51,7 @@ def validate_image(image_field: Image) -> None:
     check_image_file_extension(image_field)
 
     file_extension = image_field.name.split(".")[-1].lower()
-    if file_extension in ["svg", "webp"]:
+    if file_extension in ["svg"]:
         return
 
     try:

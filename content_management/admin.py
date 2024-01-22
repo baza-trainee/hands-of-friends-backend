@@ -41,7 +41,7 @@ class TeamMemberAdmin(TranslationAdmin, ImageAdminMixin):
 @admin.register(PartnerLogo)
 class PartnerLogoAdmin(admin.ModelAdmin, ImageAdminMixin):
     list_display = (
-        "id",
+        "company_name",
         "image_tag",
     )
-    search_fields = ("id",)
+    search_fields = ("company_name",)

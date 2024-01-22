@@ -3,11 +3,12 @@ from django.db import models
 
 from content_management.upload_to_path import UploadToPath
 from content_management.validators import validate_image
+from ckeditor.fields import RichTextField
 
 
 class Tender(models.Model):
     title = models.CharField()
-    description = models.TextField()
+    description = RichTextField()
     date = models.DateField()
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -38,7 +39,7 @@ class Project(models.Model):
             raise ValidationError({"image": e})
 
     def save(
-        self, force_insert=False, force_update=False, using=None, update_fields=None
+            self, force_insert=False, force_update=False, using=None, update_fields=None
     ):
         self.full_clean()
         super().save(force_insert, force_update, using, update_fields)
@@ -75,11 +76,12 @@ class TeamMember(models.Model):
 
 
 class PartnerLogo(models.Model):
+    company_name = models.CharField(max_length=255, unique=True, null=True, blank=True)
     image = models.FileField(upload_to=UploadToPath("partner-logos/"))
     added_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ["-added_at"]
+        ordering = ["company_name"]
         verbose_name_plural = "partner logos"
         verbose_name = "partner logo"
 
@@ -90,10 +92,10 @@ class PartnerLogo(models.Model):
             raise ValidationError({"image": e})
 
     def save(
-        self, force_insert=False, force_update=False, using=None, update_fields=None
+            self, force_insert=False, force_update=False, using=None, update_fields=None
     ):
         self.full_clean()
         super().save(force_insert, force_update, using, update_fields)
 
     def __str__(self):
-        return f"Partner logo {self.added_at}"
+        return f"{self.company_name} logo"

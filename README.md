@@ -72,14 +72,29 @@ etc, all from one central location.
 **Admin Panel:** Provides a simple and intuitive interface for managing the website's content, including the ability to
 add, edit and delete content.
 
-
 ## Key Technologies Used
 
-- Django
-- Django REST Framework
-- Django CORS Headers
-- Django models translation (for multilingual support)
-- PostgreSQL
-- Docker
-- Swagger
-- Render
+This project leverages a robust stack of technologies to ensure efficient, scalable, and user-friendly web development.
+Here's an overview:
+
+- **Django** (`django`): A high-level Python web framework that encourages rapid development and clean, pragmatic
+  design.
+- **Django REST Framework** (`djangorestframework`): A powerful toolkit for building Web APIs, offering flexibility and
+  ease in creating complex data-driven applications.
+- **Django CORS Headers** (`django-cors-headers`): A Django application for handling the server headers required for
+  Cross-Origin Resource Sharing (CORS).
+- **Django Models Translation** (`django-modeltranslation`): Provides multilingual support for model fields,
+  facilitating easy content management in different languages.
+- **Pillow** (`pillow`): Adds image processing capabilities, essential for handling media content.
+- **django_cleanup** (`django-cleanup`): Automatically deletes orphaned files associated with `FileField`
+  and `ImageField` upon the deletion of a model instance, enhancing file system management.
+- **ckeditor** (`django-ckeditor`): RichText editor that provides a wide range of text editing features, integrated into
+  Django models for enhanced content management.
+- **PostgreSQL**: A powerful, open-source object-relational database system with a strong reputation for reliability,
+  feature robustness, and performance.
+- **Docker**: A set of platform-as-a-service products that use OS-level virtualization to deliver software in packages
+  called containers, ensuring consistency across multiple development and release cycles.
+- **Swagger** (`drf-spectacular`): An Interface Description Language for describing RESTful APIs expressed using JSON.
+  It is used for API documentation and to drive the API user interface.
+- **Render**: A unified platform to build and run all your apps and websites with free SSL, a global CDN, private
+  networks, and auto deploys from Git.

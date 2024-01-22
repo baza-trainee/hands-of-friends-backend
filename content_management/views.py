@@ -21,8 +21,20 @@ class TenderPagination(BasePagination):
     page_size = 9
 
 
-class ProjectPagination(BasePagination):
-    page_size = 3
+class ProjectPagination(PageNumberPagination):
+    max_page_size = 100
+    page_size_query_param = (
+        "limit"
+    )
+
+    def get_page_size(self, request):
+        limit = request.query_params.get(self.page_size_query_param)
+        if limit:
+            try:
+                return min(int(limit), self.max_page_size)
+            except ValueError:
+                pass
+        return super().get_page_size(request)
 
 
 @extend_schema(
@@ -100,7 +112,12 @@ class ProjectViewSet(mixins.ListModelMixin, GenericViewSet):
                 "is_active",
                 type=OpenApiTypes.STR,
                 description="Filter by is_active field true, false (ex. ?is_active=true)",
-            )
+            ),
+            OpenApiParameter(
+                name="limit",
+                type=OpenApiTypes.INT,
+                description="Number of results to return per page (ex. ?limit=2)",
+            ),
         ]
     )
     def list(self, request, *args, **kwargs):
