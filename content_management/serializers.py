@@ -7,6 +7,7 @@ from content_management.models import (
     PartnerLogo,
     News,
     Contacts,
+    PDFReport,
 )
 
 
@@ -77,4 +78,15 @@ class ContactsSerializer(serializers.ModelSerializer):
             "youtube_link",
             "facebook_link",
             "address",
+        )
+
+
+class PDFReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PDFReport
+        fields = (
+            "id",
+            "title",
+            "file_url",
+            "added_at",
         )

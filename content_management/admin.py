@@ -9,6 +9,7 @@ from content_management.models import (
     PartnerLogo,
     News,
     Contacts,
+    PDFReport,
 )
 
 
@@ -71,6 +72,21 @@ class ContactsAdmin(TranslationAdmin):
 
     def has_add_permission(self, request, obj=None):
         if Contacts.objects.exists():
+            return False
+        return True
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+@admin.register(PDFReport)
+class PDFReportAdmin(admin.ModelAdmin):
+    """PDFReport Admin with singleton pattern"""
+
+    list_display = ("title", "file_url", "added_at")
+
+    def has_add_permission(self, request, obj=None):
+        if PDFReport.objects.exists():
             return False
         return True
 

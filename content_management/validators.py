@@ -1,8 +1,10 @@
 """Image and file validators for content_management app."""
 import io
+import os
 
 from django.core.exceptions import ValidationError
 from PIL import Image
+from django.db.models.fields.files import FileField
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
 MAX_FILE_SIZE = 2 * 1024 * 1024  # 2 MB
@@ -59,3 +61,18 @@ def validate_image(image_field: Image) -> None:
         convert_and_optimize_webp(image_field)
     except Exception:
         raise ValidationError("Invalid image format.")
+
+
+def check_if_pdf_file(file_field: FileField) -> None:
+    if not file_field.name.lower().endswith(".pdf"):
+        raise ValidationError("Unsupported file extension. Allowed extension is pdf.")
+
+
+def validate_pdf_file(file_field: FileField) -> None:
+    """Validator for PDF files."""
+    check_if_pdf_file(file_field)
+
+    if os.path.getsize(file_field.path) > MAX_FILE_SIZE:
+        raise ValidationError(
+            "PDF size is too large even after compression. Max size is 2 MB."
+        )
