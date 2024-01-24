@@ -1,6 +1,13 @@
 from rest_framework import serializers
 
-from content_management.models import Tender, Project, TeamMember, PartnerLogo, News
+from content_management.models import (
+    Tender,
+    Project,
+    TeamMember,
+    PartnerLogo,
+    News,
+    Contacts,
+)
 
 
 class TenderSerializer(serializers.ModelSerializer):
@@ -57,4 +64,17 @@ class NewsSerializer(serializers.ModelSerializer):
             "title",
             "description",
             "link_to_news",
+        )
+
+
+class ContactsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contacts
+        fields = (
+            "id",
+            "phone_number",
+            "email",
+            "youtube_link",
+            "facebook_link",
+            "address",
         )

@@ -15,7 +15,7 @@ class Tender(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["-date", "-is_active"]
+        ordering = ["-is_active", "-date"]
 
     def __str__(self):
         return f"{self.title} [{self.date}]"
@@ -127,3 +127,22 @@ class News(models.Model):
 
     def __str__(self):
         return f"{self.title}"
+
+
+class Contacts(models.Model):
+    phone_number = models.CharField(max_length=255)
+    email = models.EmailField()
+    youtube_link = models.URLField()
+    facebook_link = models.URLField()
+    address = models.CharField(max_length=255)
+
+    class Meta:
+        verbose_name_plural = "contacts"
+
+    def __str__(self):
+        return "Contacts"
+
+    def save(self, *args, **kwargs):
+        if not self.pk and Contacts.objects.exists():
+            raise Exception("Only one Contacts instance is allowed.")
+        super(Contacts, self).save(*args, **kwargs)

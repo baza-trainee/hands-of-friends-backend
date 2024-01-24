@@ -2,7 +2,14 @@ from django.contrib import admin
 from django.utils.html import mark_safe
 from modeltranslation.admin import TranslationAdmin
 
-from content_management.models import Tender, Project, TeamMember, PartnerLogo, News
+from content_management.models import (
+    Tender,
+    Project,
+    TeamMember,
+    PartnerLogo,
+    News,
+    Contacts,
+)
 
 
 class ImageAdminMixin:
@@ -53,3 +60,19 @@ class NewsAdmin(TranslationAdmin, ImageAdminMixin):
     list_filter = ("title", "date")
     search_fields = ("title", "date")
     group_fieldsets = True
+
+
+@admin.register(Contacts)
+class ContactsAdmin(TranslationAdmin):
+    """Contacts Admin with singleton pattern"""
+
+    list_display = ("phone_number", "email", "youtube_link", "facebook_link", "address")
+    group_fieldsets = True
+
+    def has_add_permission(self, request, obj=None):
+        if Contacts.objects.exists():
+            return False
+        return True
+
+    def has_delete_permission(self, request, obj=None):
+        return False

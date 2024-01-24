@@ -6,6 +6,7 @@ from content_management.views import (
     TeamMemberViewSet,
     PartnerLogoViewSet,
     NewsViewSet,
+    ContactsViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -14,6 +15,7 @@ router.register("projects", ProjectViewSet)
 router.register("team", TeamMemberViewSet)
 router.register("partners", PartnerLogoViewSet)
 router.register("news", NewsViewSet)
+router.register("contacts", ContactsViewSet)
 
 urlpatterns = router.urls
 

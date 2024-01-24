@@ -4,22 +4,26 @@ from rest_framework import mixins
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.viewsets import GenericViewSet
 
-from content_management.models import Tender, Project, TeamMember, PartnerLogo, News
+from content_management.models import (
+    Tender,
+    Project,
+    TeamMember,
+    PartnerLogo,
+    News,
+    Contacts,
+)
 from content_management.serializers import (
     TenderSerializer,
     ProjectSerializer,
     TeamMemberSerializer,
     PartnerLogoSerializer,
     NewsSerializer,
+    ContactsSerializer,
 )
 
 
 class BasePagination(PageNumberPagination):
     max_page_size = 100
-
-
-class TenderPagination(BasePagination):
-    page_size = 9
 
 
 class ProjectPagination(PageNumberPagination):
@@ -51,7 +55,6 @@ class ProjectPagination(PageNumberPagination):
 class TenderViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericViewSet):
     queryset = Tender.objects.all()
     serializer_class = TenderSerializer
-    pagination_class = TenderPagination
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -145,6 +148,35 @@ class PartnerLogoViewSet(mixins.ListModelMixin, GenericViewSet):
     serializer_class = PartnerLogoSerializer
 
 
+@extend_schema(
+    parameters=[
+        OpenApiParameter(
+            name="Accept-Language",
+            type=OpenApiTypes.STR,
+            location=OpenApiParameter.HEADER,
+            required=False,
+            description="Language code to get the content in a specific language (e.g., en, uk)",
+            enum=["en", "uk"],
+        ),
+    ]
+)
 class NewsViewSet(mixins.ListModelMixin, GenericViewSet):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
+
+
+@extend_schema(
+    parameters=[
+        OpenApiParameter(
+            name="Accept-Language",
+            type=OpenApiTypes.STR,
+            location=OpenApiParameter.HEADER,
+            required=False,
+            description="Language code to get the content in a specific language (e.g., en, uk)",
+            enum=["en", "uk"],
+        ),
+    ]
+)
+class ContactsViewSet(mixins.ListModelMixin, GenericViewSet):
+    queryset = Contacts.objects.all()
+    serializer_class = ContactsSerializer
