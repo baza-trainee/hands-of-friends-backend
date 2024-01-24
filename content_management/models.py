@@ -15,7 +15,7 @@ class Tender(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["-date", "-is_active"]
+        ordering = ["-is_active", "-date"]
 
     def __str__(self):
         return f"{self.title} [{self.date}]"
