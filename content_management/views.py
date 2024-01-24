@@ -26,10 +26,6 @@ class BasePagination(PageNumberPagination):
     max_page_size = 100
 
 
-class TenderPagination(BasePagination):
-    page_size = 9
-
-
 class ProjectPagination(PageNumberPagination):
     max_page_size = 100
     page_size_query_param = "limit"
@@ -59,7 +55,6 @@ class ProjectPagination(PageNumberPagination):
 class TenderViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericViewSet):
     queryset = Tender.objects.all()
     serializer_class = TenderSerializer
-    pagination_class = TenderPagination
 
     def get_queryset(self):
         queryset = super().get_queryset()
