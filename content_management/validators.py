@@ -72,7 +72,12 @@ def validate_pdf_file(file_field: FileField) -> None:
     """Validator for PDF files."""
     check_if_pdf_file(file_field)
 
-    if os.path.getsize(file_field.path) > MAX_FILE_SIZE:
-        raise ValidationError(
-            "PDF size is too large even after compression. Max size is 2 MB."
-        )
+    if hasattr(file_field.file, "temporary_file_path"):
+        file_size = os.path.getsize(file_field.file.temporary_file_path())
+    else:
+        file_field.file.seek(0, os.SEEK_END)
+        file_size = file_field.file.tell()
+        file_field.file.seek(0)
+
+    if file_size > MAX_FILE_SIZE:
+        raise ValidationError("PDF size is too large. Max size is 2 MB.")
