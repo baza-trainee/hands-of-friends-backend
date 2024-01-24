@@ -11,6 +11,7 @@ from content_management.models import (
     PartnerLogo,
     News,
     Contacts,
+    PDFReport,
 )
 from content_management.serializers import (
     TenderSerializer,
@@ -19,6 +20,7 @@ from content_management.serializers import (
     PartnerLogoSerializer,
     NewsSerializer,
     ContactsSerializer,
+    PDFReportSerializer,
 )
 
 
@@ -180,3 +182,8 @@ class NewsViewSet(mixins.ListModelMixin, GenericViewSet):
 class ContactsViewSet(mixins.ListModelMixin, GenericViewSet):
     queryset = Contacts.objects.all()
     serializer_class = ContactsSerializer
+
+
+class PDFReportView(mixins.ListModelMixin, GenericViewSet):
+    queryset = PDFReport.objects.all()
+    serializer_class = PDFReportSerializer

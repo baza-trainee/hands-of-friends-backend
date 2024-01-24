@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 
 from content_management.upload_to_path import UploadToPath
-from content_management.validators import validate_image
+from content_management.validators import validate_image, validate_pdf_file
 from ckeditor.fields import RichTextField
 
 
@@ -146,3 +146,26 @@ class Contacts(models.Model):
         if not self.pk and Contacts.objects.exists():
             raise Exception("Only one Contacts instance is allowed.")
         super(Contacts, self).save(*args, **kwargs)
+
+
+class PDFReport(models.Model):
+    title = models.CharField(max_length=255)
+    file_url = models.FileField(upload_to=UploadToPath("pdf-report/"))
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "PDF report"
+
+    def __str__(self):
+        return f"{self.title}"
+
+    def clean(self):
+        try:
+            validate_pdf_file(self.file_url)
+        except ValidationError as e:
+            raise ValidationError({"file_url": e})
+
+    def save(self, *args, **kwargs):
+        if not self.pk and PDFReport.objects.exists():
+            raise Exception("Only one PDFReport instance is allowed.")
+        super().save(*args, **kwargs)
