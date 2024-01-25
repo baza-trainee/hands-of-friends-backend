@@ -2,8 +2,33 @@ from django.core.exceptions import ValidationError
 from django.db import models
 
 from content_management.upload_to_path import UploadToPath
-from content_management.validators import validate_image, validate_pdf_file
+from validators.image_validation import validate_and_convert_image
+from validators.pdf_validation import validate_pdf_file
 from ckeditor.fields import RichTextField
+
+
+class Singleton(models.Model):
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        if not self.pk and self.__class__.objects.exists():
+            raise Exception(f"Only one {self.__class__.__name__} instance is allowed.")
+        super().save(*args, **kwargs)
+
+
+class Image(models.Model):
+    image = models.FileField(upload_to=UploadToPath("default/"))
+
+    class Meta:
+        abstract = True
+
+    def clean(self):
+        try:
+            validate_and_convert_image(self.image)
+        except ValidationError as e:
+            raise ValidationError({"image": e})
+        super().clean()
 
 
 class Tender(models.Model):
@@ -18,11 +43,10 @@ class Tender(models.Model):
         ordering = ["-is_active", "-date"]
 
     def __str__(self):
-        return f"{self.title} [{self.date}]"
+        return f"{self.title} ({self.date})"
 
 
-class Project(models.Model):
-    image = models.FileField(upload_to=UploadToPath("projects/"))
+class Project(Image):
     title = models.CharField()
     description = models.TextField()
     is_active = models.BooleanField(default=True)
@@ -32,24 +56,15 @@ class Project(models.Model):
     class Meta:
         ordering = ["-is_active", "-created_at"]
 
-    def clean(self):
-        try:
-            validate_image(self.image)
-        except ValidationError as e:
-            raise ValidationError({"image": e})
-
-    def save(
-        self, force_insert=False, force_update=False, using=None, update_fields=None
-    ):
-        self.full_clean()
-        super().save(force_insert, force_update, using, update_fields)
-
     def __str__(self):
         return f"{self.title}"
 
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
 
-class TeamMember(models.Model):
-    image = models.FileField(upload_to=UploadToPath("team-members/"))
+
+class TeamMember(Image):
     full_name = models.CharField(max_length=255)
     position = models.CharField(max_length=255)
     added_at = models.DateTimeField(auto_now_add=True)
@@ -59,25 +74,16 @@ class TeamMember(models.Model):
         verbose_name_plural = "team members"
         verbose_name = "team member"
 
-    def clean(self):
-        try:
-            validate_image(self.image)
-        except ValidationError as e:
-            raise ValidationError({"image": e})
-
-    def save(
-        self, force_insert=False, force_update=False, using=None, update_fields=None
-    ):
-        self.full_clean()
-        super().save(force_insert, force_update, using, update_fields)
-
     def __str__(self):
-        return f"{self.full_name} [{self.position}]"
+        return f"{self.full_name} ({self.position})"
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
 
 
-class PartnerLogo(models.Model):
-    company_name = models.CharField(max_length=255, unique=True, null=True, blank=True)
-    image = models.FileField(upload_to=UploadToPath("partner-logos/"))
+class PartnerLogo(Image):
+    company_name = models.CharField(unique=True, null=True, blank=True)
     added_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -85,26 +91,17 @@ class PartnerLogo(models.Model):
         verbose_name_plural = "partner logos"
         verbose_name = "partner logo"
 
-    def clean(self):
-        try:
-            validate_image(self.image)
-        except ValidationError as e:
-            raise ValidationError({"image": e})
-
-    def save(
-        self, force_insert=False, force_update=False, using=None, update_fields=None
-    ):
-        self.full_clean()
-        super().save(force_insert, force_update, using, update_fields)
-
     def __str__(self):
         return f"{self.company_name} logo"
 
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
 
-class News(models.Model):
-    image = models.FileField(upload_to=UploadToPath("news/"))
+
+class News(Image):
     date = models.DateField()
-    title = models.CharField(max_length=255)
+    title = models.CharField()
     description = models.TextField()
     link_to_news = models.URLField()
     added_at = models.DateTimeField(auto_now_add=True)
@@ -113,23 +110,15 @@ class News(models.Model):
         ordering = ["-date"]
         verbose_name_plural = "news"
 
-    def clean(self):
-        try:
-            validate_image(self.image)
-        except ValidationError as e:
-            raise ValidationError({"image": e})
-
-    def save(
-        self, force_insert=False, force_update=False, using=None, update_fields=None
-    ):
-        self.full_clean()
-        super().save(force_insert, force_update, using, update_fields)
-
     def __str__(self):
         return f"{self.title}"
 
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
 
-class Contacts(models.Model):
+
+class Contacts(Singleton):
     phone_number = models.CharField(max_length=255)
     email = models.EmailField()
     youtube_link = models.URLField()
@@ -142,13 +131,8 @@ class Contacts(models.Model):
     def __str__(self):
         return "Contacts"
 
-    def save(self, *args, **kwargs):
-        if not self.pk and Contacts.objects.exists():
-            raise Exception("Only one Contacts instance is allowed.")
-        super(Contacts, self).save(*args, **kwargs)
 
-
-class PDFReport(models.Model):
+class PDFReport(Singleton):
     title = models.CharField(max_length=255)
     file_url = models.FileField(upload_to=UploadToPath("pdf-report/"))
     added_at = models.DateTimeField(auto_now_add=True)
@@ -164,8 +148,8 @@ class PDFReport(models.Model):
             validate_pdf_file(self.file_url)
         except ValidationError as e:
             raise ValidationError({"file_url": e})
+        super().clean()
 
     def save(self, *args, **kwargs):
-        if not self.pk and PDFReport.objects.exists():
-            raise Exception("Only one PDFReport instance is allowed.")
+        self.full_clean()
         super().save(*args, **kwargs)
