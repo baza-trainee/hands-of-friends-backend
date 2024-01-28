@@ -28,7 +28,7 @@ class BasePagination(PageNumberPagination):
     max_page_size = 100
 
 
-class ProjectPagination(PageNumberPagination):
+class DynamicPagination(PageNumberPagination):
     max_page_size = 100
     page_size_query_param = "limit"
 
@@ -97,7 +97,7 @@ class TenderViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVie
 class ProjectViewSet(mixins.ListModelMixin, GenericViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
-    pagination_class = ProjectPagination
+    pagination_class = DynamicPagination
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -165,6 +165,7 @@ class PartnerLogoViewSet(mixins.ListModelMixin, GenericViewSet):
 class NewsViewSet(mixins.ListModelMixin, GenericViewSet):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
+    pagination_class = DynamicPagination
 
 
 @extend_schema(
