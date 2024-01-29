@@ -35,7 +35,7 @@ class Tender(models.Model):
 class Project(models.Model):
     image = models.FileField(upload_to="projects/")
     title = models.CharField()
-    description = models.TextField()
+    description = RichTextField()
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
