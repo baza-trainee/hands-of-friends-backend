@@ -20,16 +20,17 @@ class Singleton(models.Model):
 class Tender(models.Model):
     title = models.CharField()
     description = RichTextField()
-    date = models.DateField()
+    start_date = models.DateField()
+    end_date = models.DateField()
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ["-is_active", "-date"]
+        ordering = ["-is_active", "-start_date"]
 
     def __str__(self):
-        return f"{self.title} ({self.date})"
+        return f"{self.title} ({self.start_date} - {self.end_date})"
 
 
 class Project(models.Model):
