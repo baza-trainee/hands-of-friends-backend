@@ -24,8 +24,8 @@ class ImageAdminMixin:
 
 @admin.register(Tender)
 class TenderAdmin(TranslationAdmin):
-    list_display = ("title", "date", "is_active")
-    list_filter = ("title", "is_active", "date")
+    list_display = ("title", "start_date", "is_active")
+    list_filter = ("title", "is_active", "start_date", "end_date")
     search_fields = ("title", "date")
     group_fieldsets = True
 
