@@ -18,7 +18,8 @@ class TenderSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "description",
-            "date",
+            "start_date",
+            "end_date",
             "is_active",
         )
 
