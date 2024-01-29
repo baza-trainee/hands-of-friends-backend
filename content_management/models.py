@@ -17,20 +17,6 @@ class Singleton(models.Model):
         super().save(*args, **kwargs)
 
 
-class Image(models.Model):
-    image = models.FileField(upload_to=UploadToPath("default/"))
-
-    class Meta:
-        abstract = True
-
-    def clean(self):
-        try:
-            validate_and_convert_image(self.image)
-        except ValidationError as e:
-            raise ValidationError({"image": e})
-        super().clean()
-
-
 class Tender(models.Model):
     title = models.CharField()
     description = RichTextField()
@@ -46,7 +32,8 @@ class Tender(models.Model):
         return f"{self.title} ({self.date})"
 
 
-class Project(Image):
+class Project(models.Model):
+    image = models.FileField(upload_to="projects/")
     title = models.CharField()
     description = models.TextField()
     is_active = models.BooleanField(default=True)
@@ -59,12 +46,20 @@ class Project(Image):
     def __str__(self):
         return f"{self.title}"
 
+    def clean(self):
+        try:
+            validate_and_convert_image(self.image)
+        except ValidationError as e:
+            raise ValidationError({"image": e})
+        super().clean()
+
     def save(self, *args, **kwargs):
         self.full_clean()
         super().save(*args, **kwargs)
 
 
-class TeamMember(Image):
+class TeamMember(models.Model):
+    image = models.FileField(upload_to="team-members/")
     full_name = models.CharField(max_length=255)
     position = models.CharField(max_length=255)
     added_at = models.DateTimeField(auto_now_add=True)
@@ -77,12 +72,20 @@ class TeamMember(Image):
     def __str__(self):
         return f"{self.full_name} ({self.position})"
 
+    def clean(self):
+        try:
+            validate_and_convert_image(self.image)
+        except ValidationError as e:
+            raise ValidationError({"image": e})
+        super().clean()
+
     def save(self, *args, **kwargs):
         self.full_clean()
         super().save(*args, **kwargs)
 
 
-class PartnerLogo(Image):
+class PartnerLogo(models.Model):
+    image = models.FileField(upload_to="partner-logos/")
     company_name = models.CharField(unique=True, null=True, blank=True)
     added_at = models.DateTimeField(auto_now_add=True)
 
@@ -94,12 +97,20 @@ class PartnerLogo(Image):
     def __str__(self):
         return f"{self.company_name} logo"
 
+    def clean(self):
+        try:
+            validate_and_convert_image(self.image)
+        except ValidationError as e:
+            raise ValidationError({"image": e})
+        super().clean()
+
     def save(self, *args, **kwargs):
         self.full_clean()
         super().save(*args, **kwargs)
 
 
-class News(Image):
+class News(models.Model):
+    image = models.FileField(upload_to="news/")
     date = models.DateField()
     title = models.CharField()
     description = models.TextField()
@@ -112,6 +123,13 @@ class News(Image):
 
     def __str__(self):
         return f"{self.title}"
+
+    def clean(self):
+        try:
+            validate_and_convert_image(self.image)
+        except ValidationError as e:
+            raise ValidationError({"image": e})
+        super().clean()
 
     def save(self, *args, **kwargs):
         self.full_clean()
