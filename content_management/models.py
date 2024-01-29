@@ -32,6 +32,10 @@ class Tender(models.Model):
     def __str__(self):
         return f"{self.title} ({self.start_date} - {self.end_date})"
 
+    def clean(self):
+        if self.start_date and self.end_date and self.start_date > self.end_date:
+            raise ValidationError("Start date cannot be after end date.")
+
 
 class Project(models.Model):
     image = models.FileField(upload_to="projects/")
