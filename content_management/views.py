@@ -116,12 +116,7 @@ class ProjectViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVi
                 "is_active",
                 type=OpenApiTypes.STR,
                 description="Filter by is_active field true, false (ex. ?is_active=true)",
-            ),
-            OpenApiParameter(
-                name="limit",
-                type=OpenApiTypes.INT,
-                description="Number of results to return per page (ex. ?limit=2)",
-            ),
+            )
         ]
     )
     def list(self, request, *args, **kwargs):

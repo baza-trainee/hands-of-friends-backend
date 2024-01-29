@@ -33,7 +33,7 @@ class TenderAdmin(TranslationAdmin):
 @admin.register(Project)
 class ProjectAdmin(TranslationAdmin, ImageAdminMixin):
     list_display = ("title", "is_active", "image_tag")
-    list_filter = ("title", "is_active")
+    list_filter = ("is_active",)
     search_fields = ("title",)
     group_fieldsets = True
 
@@ -41,7 +41,7 @@ class ProjectAdmin(TranslationAdmin, ImageAdminMixin):
 @admin.register(TeamMember)
 class TeamMemberAdmin(TranslationAdmin, ImageAdminMixin):
     list_display = ("full_name", "position", "image_tag")
-    list_filter = ("full_name", "position")
+    list_filter = ("position",)
     search_fields = ("full_name", "position")
     group_fieldsets = True
 
@@ -58,7 +58,7 @@ class PartnerLogoAdmin(admin.ModelAdmin, ImageAdminMixin):
 @admin.register(News)
 class NewsAdmin(TranslationAdmin, ImageAdminMixin):
     list_display = ("title", "date", "image_tag")
-    list_filter = ("title", "date")
+    list_filter = ("date",)
     search_fields = ("title", "date")
     group_fieldsets = True
 
