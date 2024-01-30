@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "ckeditor",
     "user",
     "content_management",
+    "feedback",
     "django_cleanup.apps.CleanupConfig",  # Must be the last one in the list
 ]
 
