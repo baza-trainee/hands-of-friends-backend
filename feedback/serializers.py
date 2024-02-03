@@ -1,4 +1,6 @@
 from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
+
 from feedback.models import FeedbackForm
 
 
@@ -15,3 +17,9 @@ class FeedbackFormSerializer(serializers.ModelSerializer):
             "message",
             "sent_at",
         )
+
+    def validate(self, data):
+        request = self.context["request"]
+        if request.content_type != "application/json":
+            raise ValidationError("Content-Type must be 'application/json'.")
+        return data
