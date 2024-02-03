@@ -1,3 +1,4 @@
+import re
 from django.core.exceptions import ValidationError
 from validators.constants import RESTRICTED_EMAIL_DOMAINS
 
@@ -10,8 +11,8 @@ def validate_email_domain(email: str) -> None:
 
 
 def validate_name(name: str) -> str:
-    if not name.isalpha():
-        raise ValidationError("Name must contain only letters.")
+    if not re.match(r"^[A-Za-z\s'-]+$", name):
+        raise ValidationError("Name must contain only letters, spaces, or hyphens.")
 
     if len(name) < 2:
         raise ValidationError("Name must be at least 2 characters long.")
