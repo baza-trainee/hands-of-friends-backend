@@ -25,8 +25,7 @@ class Migration(migrations.Migration):
                 (
                     "name",
                     models.CharField(
-                        max_length=50,
-                        validators=[validators.feedback_form_validation.validate_name],
+                        validators=[validators.feedback_form_validation.validate_name]
                     ),
                 ),
                 (
@@ -41,10 +40,17 @@ class Migration(migrations.Migration):
                 (
                     "phone_number",
                     models.CharField(
-                        max_length=30,
+                        validators=[
+                            validators.feedback_form_validation.validate_phone_number
+                        ]
                     ),
                 ),
-                ("message", models.TextField()),
+                (
+                    "message",
+                    models.TextField(
+                        max_length=300,
+                    ),
+                ),
                 ("sent_at", models.DateTimeField(auto_now_add=True)),
             ],
             options={

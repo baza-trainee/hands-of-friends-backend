@@ -21,3 +21,19 @@ def validate_name(name: str) -> str:
         raise ValidationError("Name must be at most 50 characters long.")
 
     return name
+
+
+def validate_phone_number(phone_number: str) -> str:
+    """Phone number must contain only digits, '+', '(', ')', '-' and empty space."""
+    if not re.match(r"^[0-9\s+()-]+$", phone_number):
+        raise ValidationError(
+            "Phone number must contain only digits, '+', '(', ')', '-' and empty space."
+        )
+
+    if len(phone_number) < 6:
+        raise ValidationError("Phone number must be at least 6 characters long.")
+
+    if len(phone_number) > 30:
+        raise ValidationError("Phone number must be at most 30 characters long.")
+
+    return phone_number
