@@ -44,6 +44,7 @@ INTERNAL_IPS = [
 
 INSTALLED_APPS = [
     "modeltranslation",
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -78,7 +79,7 @@ ROOT_URLCONF = "hands_of_friends.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -147,9 +148,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_STORAGE = (
+    "configurations.storage_backends.ForgivingCompressedManifestStaticFilesStorage"
+)
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
@@ -257,4 +261,51 @@ CKEDITOR_CONFIGS = {
             ]
         ),
     }
+}
+
+# Jazzmin Configuration (Admin Panel)
+JAZZMIN_SETTINGS = {
+    "site_title": "Руки Друзів",
+    "site_header": "Руки Друзів",
+    "site_brand": "Руки Друзів",
+    "site_title_short": "РД",
+    "site_footer": "Руки Друзів",
+    "site_logo": "images/logo_white.png",
+    "login_logo": "images/logo.svg",
+    "site_logo_classes": "img-circle",
+    "welcome_sign": "Ласкаво просимо до панелі адміністрування сайту Руки Друзів",
+    "language_chooser": False,
+    "default_icon_parents": "fas fa-caret-right",
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": "navbar-dark",
+    "accent": "accent-lightblue",
+    "navbar": "navbar-dark",
+    "no_navbar_border": True,
+    "navbar_fixed": False,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": False,
+    "sidebar": "sidebar-dark-lightblue",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": True,
+    "sidebar_nav_legacy_style": True,
+    "sidebar_nav_flat_style": True,
+    "theme": "default",
+    "dark_mode_theme": None,
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-outline-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success",
+    },
 }
