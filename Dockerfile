@@ -14,6 +14,8 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
+RUN python manage.py collectstatic --noinput
+
 RUN mkdir -p /vol/web/media
 
 RUN adduser --disabled-password --no-create-home django-user && \
