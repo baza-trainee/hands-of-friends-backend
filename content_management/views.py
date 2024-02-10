@@ -140,6 +140,18 @@ class TeamMemberViewSet(mixins.ListModelMixin, GenericViewSet):
     serializer_class = TeamMemberSerializer
 
 
+@extend_schema(
+    parameters=[
+        OpenApiParameter(
+            name="Accept-Language",
+            type=OpenApiTypes.STR,
+            location=OpenApiParameter.HEADER,
+            required=False,
+            description="Language code to get the content in a specific language (e.g., en, uk)",
+            enum=["en", "uk"],
+        ),
+    ]
+)
 class PartnerLogoViewSet(mixins.ListModelMixin, GenericViewSet):
     queryset = PartnerLogo.objects.all()
     serializer_class = PartnerLogoSerializer

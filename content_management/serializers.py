@@ -5,6 +5,7 @@ from content_management.models import (
     Project,
     TeamMember,
     PartnerLogo,
+    DonorLogo,
     News,
     Contacts,
     PDFReport,
@@ -59,6 +60,15 @@ class PartnerLogoSerializer(serializers.ModelSerializer):
             "company_name",
         )
 
+
+class DonorLogoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DonorLogo
+        fields = (
+            "id",
+            "image",
+            "name",
+        )
 
 
 class NewsSerializer(serializers.ModelSerializer):
