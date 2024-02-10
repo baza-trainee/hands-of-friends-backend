@@ -99,7 +99,10 @@ class TeamMember(models.Model):
 class PartnerLogo(models.Model):
     image = models.FileField(upload_to="partner-logos/", verbose_name=_("Image"))
     company_name = models.CharField(
-        unique=True, null=True, blank=True, verbose_name=_("Company Name")
+        max_length=100,
+        unique=True,
+        default=_("Company Name"),
+        verbose_name=_("Company Name"),
     )
     added_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Added At"))
 
