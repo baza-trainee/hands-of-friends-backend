@@ -3,8 +3,11 @@ from django.db import models
 from django.utils.translation import gettext as _
 
 from content_management.upload_to_path import UploadToPath
+
 from validators.image_validation import validate_and_convert_image
 from validators.pdf_validation import validate_pdf_file
+
+from content_management.help_texts import IMAGE_HELP_TEXT, PDF_HELP_TEXT
 from ckeditor.fields import RichTextField
 
 
@@ -43,7 +46,9 @@ class Tender(models.Model):
 
 
 class Project(models.Model):
-    image = models.FileField(upload_to="projects/", verbose_name=_("Image"))
+    image = models.FileField(
+        upload_to="projects/", verbose_name=_("Image"), help_text=IMAGE_HELP_TEXT
+    )
     title = models.CharField(verbose_name=_("Title"))
     description = RichTextField(verbose_name=_("Description"))
     is_active = models.BooleanField(default=True, verbose_name=_("Is Active"))
@@ -71,7 +76,9 @@ class Project(models.Model):
 
 
 class TeamMember(models.Model):
-    image = models.FileField(upload_to="team-members/", verbose_name=_("Image"))
+    image = models.FileField(
+        upload_to="team-members/", verbose_name=_("Image"), help_text=IMAGE_HELP_TEXT
+    )
     full_name = models.CharField(max_length=255, verbose_name=_("Full Name"))
     position = models.CharField(max_length=255, verbose_name=_("Position"))
     added_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Added At"))
@@ -97,7 +104,9 @@ class TeamMember(models.Model):
 
 
 class PartnerLogo(models.Model):
-    image = models.FileField(upload_to="partner-logos/", verbose_name=_("Image"))
+    image = models.FileField(
+        upload_to="partner-logos/", verbose_name=_("Image"), help_text=IMAGE_HELP_TEXT
+    )
     company_name = models.CharField(
         max_length=100,
         default=_("Company Name"),
@@ -126,7 +135,9 @@ class PartnerLogo(models.Model):
 
 
 class DonorLogo(models.Model):
-    image = models.FileField(upload_to="donors-logos/", verbose_name=_("Image"))
+    image = models.FileField(
+        upload_to="donors-logos/", verbose_name=_("Image"), help_text=IMAGE_HELP_TEXT
+    )
     name = models.CharField(
         max_length=100,
         default=_("Donor Name"),
@@ -155,7 +166,9 @@ class DonorLogo(models.Model):
 
 
 class News(models.Model):
-    image = models.FileField(upload_to="news/", verbose_name=_("Image"))
+    image = models.FileField(
+        upload_to="news/", verbose_name=_("Image"), help_text=IMAGE_HELP_TEXT
+    )
     date = models.DateField(verbose_name=_("Date"))
     title = models.CharField(verbose_name=_("Title"))
     description = models.TextField(verbose_name=_("Description"))
@@ -200,7 +213,9 @@ class Contacts(Singleton):
 class PDFReport(Singleton):
     title = models.CharField(max_length=255, verbose_name=_("Title"))
     file_url = models.FileField(
-        upload_to=UploadToPath("pdf-report/"), verbose_name=_("File URL")
+        upload_to=UploadToPath("pdf-report/"),
+        verbose_name=_("File URL"),
+        help_text=PDF_HELP_TEXT,
     )
     added_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Added At"))
 
