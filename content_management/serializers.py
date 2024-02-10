@@ -12,6 +12,9 @@ from content_management.models import (
 
 
 class TenderSerializer(serializers.ModelSerializer):
+    start_date = serializers.DateField(format="%d-%m-%Y")
+    end_date = serializers.DateField(format="%d-%m-%Y")
+
     class Meta:
         model = Tender
         fields = (
