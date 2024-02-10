@@ -11,6 +11,7 @@ from content_management.models import (
     News,
     Contacts,
     PDFReport,
+    DonorLogo,
 )
 
 
@@ -48,9 +49,16 @@ class TeamMemberAdmin(TranslationAdmin, ImageAdminMixin):
 
 
 @admin.register(PartnerLogo)
-class PartnerLogoAdmin(admin.ModelAdmin, ImageAdminMixin):
+class PartnerLogoAdmin(TranslationAdmin, ImageAdminMixin):
     list_display = ("company_name", "image_tag")
     search_fields = ("company_name",)
+
+
+@admin.register(DonorLogo)
+class DonorLogoAdmin(TranslationAdmin, ImageAdminMixin):
+    list_display = ("name", "image_tag")
+    search_fields = ("name",)
+    group_fieldsets = True
 
 
 @admin.register(News)
@@ -66,8 +74,6 @@ class ContactsAdmin(TranslationAdmin):
     """Contacts Admin with singleton pattern"""
 
     list_display = ("phone_number", "email", "youtube_link", "facebook_link", "address")
-
-    group_fieldsets = True
 
     def has_add_permission(self, request, obj=None):
         if Contacts.objects.exists():

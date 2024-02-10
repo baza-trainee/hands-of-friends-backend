@@ -12,6 +12,7 @@ from content_management.models import (
     News,
     Contacts,
     PDFReport,
+    DonorLogo,
 )
 from content_management.serializers import (
     TenderSerializer,
@@ -21,6 +22,7 @@ from content_management.serializers import (
     NewsSerializer,
     ContactsSerializer,
     PDFReportSerializer,
+    DonorLogoSerializer,
 )
 
 
@@ -140,9 +142,38 @@ class TeamMemberViewSet(mixins.ListModelMixin, GenericViewSet):
     serializer_class = TeamMemberSerializer
 
 
+@extend_schema(
+    parameters=[
+        OpenApiParameter(
+            name="Accept-Language",
+            type=OpenApiTypes.STR,
+            location=OpenApiParameter.HEADER,
+            required=False,
+            description="Language code to get the content in a specific language (e.g., en, uk)",
+            enum=["en", "uk"],
+        ),
+    ]
+)
 class PartnerLogoViewSet(mixins.ListModelMixin, GenericViewSet):
     queryset = PartnerLogo.objects.all()
     serializer_class = PartnerLogoSerializer
+
+
+@extend_schema(
+    parameters=[
+        OpenApiParameter(
+            name="Accept-Language",
+            type=OpenApiTypes.STR,
+            location=OpenApiParameter.HEADER,
+            required=False,
+            description="Language code to get the content in a specific language (e.g., en, uk)",
+            enum=["en", "uk"],
+        ),
+    ]
+)
+class DonorLogoViewSet(mixins.ListModelMixin, GenericViewSet):
+    queryset = DonorLogo.objects.all()
+    serializer_class = DonorLogoSerializer
 
 
 @extend_schema(

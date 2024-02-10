@@ -5,6 +5,7 @@ from content_management.models import (
     Project,
     TeamMember,
     PartnerLogo,
+    DonorLogo,
     News,
     Contacts,
     PDFReport,
@@ -12,6 +13,9 @@ from content_management.models import (
 
 
 class TenderSerializer(serializers.ModelSerializer):
+    start_date = serializers.DateField(format="%d-%m-%Y")
+    end_date = serializers.DateField(format="%d-%m-%Y")
+
     class Meta:
         model = Tender
         fields = (
@@ -53,6 +57,17 @@ class PartnerLogoSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "image",
+            "company_name",
+        )
+
+
+class DonorLogoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DonorLogo
+        fields = (
+            "id",
+            "image",
+            "name",
         )
 
 

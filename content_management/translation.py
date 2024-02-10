@@ -1,5 +1,13 @@
 from modeltranslation.translator import register, TranslationOptions
-from content_management.models import Tender, Project, TeamMember, News, Contacts
+from content_management.models import (
+    Tender,
+    Project,
+    TeamMember,
+    News,
+    Contacts,
+    PartnerLogo,
+    DonorLogo,
+)
 
 
 @register(Tender)
@@ -15,6 +23,16 @@ class ProjectTranslationOptions(TranslationOptions):
 @register(TeamMember)
 class TeamMemberTranslationOptions(TranslationOptions):
     fields = ("full_name", "position")
+
+
+@register(PartnerLogo)
+class PartnerLogoTranslationOptions(TranslationOptions):
+    fields = ("company_name",)
+
+
+@register(DonorLogo)
+class DonorLogoTranslationOptions(TranslationOptions):
+    fields = ("name",)
 
 
 @register(News)
