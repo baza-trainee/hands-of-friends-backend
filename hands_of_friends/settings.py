@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+from django.utils.translation import gettext_lazy as _
 
 from dotenv import load_dotenv
 
@@ -69,6 +70,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.middleware.locale.LocaleMiddleware",
+    "configurations.middleware.admin_middleware.ForceAdminLanguageMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -130,10 +132,9 @@ AUTH_USER_MODEL = "user.User"
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-gettext = lambda s: s
 LANGUAGES = (
-    ("uk", gettext("Ukrainian")),
-    ("en", gettext("English")),
+    ("uk", _("Ukrainian")),
+    ("en", _("English")),
 )
 
 LANGUAGE_CODE = "uk"
@@ -143,6 +144,9 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
+
+# Locale
+LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/

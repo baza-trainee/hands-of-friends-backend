@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from PIL import Image
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.db.models.fields.files import FieldFile
+from django.utils.translation import gettext as _
 
 from validators.constants import VALID_IMAGE_EXTENSIONS, MAX_FILE_SIZE
 from validators.file_utils import FileUtility
@@ -33,13 +34,24 @@ def optimize_webp_size(image_stream: io.BytesIO, quality: int = 90) -> io.BytesI
     return image_stream
 
 
+def validate_image_size(image_field: FieldFile) -> None:
+    """Validate the image size."""
+    file_size = FileUtility.get_file_size(image_field)
+    if file_size > MAX_FILE_SIZE:
+        raise ValidationError(
+            _(f"Image size is too large. Max size is {MAX_FILE_SIZE / 1024 / 1024} MB.")
+        )
+
+
 def validate_and_convert_image(image_field: FieldFile) -> None:
     """Validate and convert the image to WEBP format if necessary."""
     file_name = image_field.name
 
     if not is_valid_image_extension(file_name):
         raise ValidationError(
-            "Unsupported file extension. Allowed extensions are jpg, jpeg, webp, png, svg."
+            _(
+                "Unsupported file extension. Allowed extensions are jpg, jpeg, webp, png, svg."
+            )
         )
 
     file_extension = FileUtility.get_file_extension(file_name)
@@ -61,11 +73,7 @@ def validate_and_convert_image(image_field: FieldFile) -> None:
         )
         image_field.name = file_name
 
-        file_size = FileUtility.get_file_size(image_field)
-        if file_size > MAX_FILE_SIZE:
-            raise ValidationError(
-                f"Image size is too large. Max size is {MAX_FILE_SIZE / 1024 / 1024} MB."
-            )
+        validate_image_size(image_field)
 
     except Exception:
-        raise ValidationError("Invalid image format.")
+        raise ValidationError(_("Invalid image format."))

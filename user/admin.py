@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from .models import User
 from django.contrib.auth.models import Group
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 
 admin.site.unregister(Group)
 
