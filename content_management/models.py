@@ -100,7 +100,6 @@ class PartnerLogo(models.Model):
     image = models.FileField(upload_to="partner-logos/", verbose_name=_("Image"))
     company_name = models.CharField(
         max_length=100,
-        unique=True,
         default=_("Company Name"),
         verbose_name=_("Company Name"),
     )
@@ -113,6 +112,35 @@ class PartnerLogo(models.Model):
 
     def __str__(self):
         return _(f"{self.company_name} logo")
+
+    def clean(self):
+        try:
+            validate_and_convert_image(self.image)
+        except ValidationError as e:
+            raise ValidationError({"image": e})
+        super().clean()
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
+
+
+class DonorLogo(models.Model):
+    image = models.FileField(upload_to="donors-logos/", verbose_name=_("Image"))
+    name = models.CharField(
+        max_length=100,
+        default=_("Donor Name"),
+        verbose_name=_("Donor Name"),
+    )
+    added_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Added At"))
+
+    class Meta:
+        ordering = ["name"]
+        verbose_name = _("Donor logo")
+        verbose_name_plural = _("Donor logos")
+
+    def __str__(self):
+        return _(f"{self.name} logo")
 
     def clean(self):
         try:
