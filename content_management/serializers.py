@@ -56,7 +56,9 @@ class PartnerLogoSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "image",
+            "company_name",
         )
+
 
 
 class NewsSerializer(serializers.ModelSerializer):
