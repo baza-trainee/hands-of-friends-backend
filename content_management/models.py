@@ -109,7 +109,8 @@ class PartnerLogo(models.Model):
     )
     company_name = models.CharField(
         max_length=100,
-        default=_("Company Name"),
+        null=True,
+        blank=True,
         verbose_name=_("Company Name"),
     )
     added_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Added At"))
@@ -140,7 +141,8 @@ class DonorLogo(models.Model):
     )
     name = models.CharField(
         max_length=100,
-        default=_("Donor Name"),
+        null=True,
+        blank=True,
         verbose_name=_("Donor Name"),
     )
     added_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Added At"))
