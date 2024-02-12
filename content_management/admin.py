@@ -58,7 +58,6 @@ class PartnerLogoAdmin(TranslationAdmin, ImageAdminMixin):
 class DonorLogoAdmin(TranslationAdmin, ImageAdminMixin):
     list_display = ("name", "image_tag")
     search_fields = ("name",)
-    group_fieldsets = True
 
 
 @admin.register(News)

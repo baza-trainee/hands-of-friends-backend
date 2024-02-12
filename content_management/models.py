@@ -24,7 +24,7 @@ class Singleton(models.Model):
 
 
 class Tender(models.Model):
-    title = models.CharField(verbose_name=_("Title"))
+    title = models.CharField(max_length=200, verbose_name=_("Title"))
     description = RichTextField(verbose_name=_("Description"))
     start_date = models.DateField(verbose_name=_("Start Date"))
     end_date = models.DateField(verbose_name=_("End Date"))
