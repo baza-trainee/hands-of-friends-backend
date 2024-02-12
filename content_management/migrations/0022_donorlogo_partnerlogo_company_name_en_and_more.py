@@ -33,15 +33,16 @@ class Migration(migrations.Migration):
                 (
                     "name",
                     models.CharField(
-                        default="Імʼя донора",
+                        blank=True,
                         max_length=100,
+                        null=True,
                         verbose_name="Імʼя донора",
                     ),
                 ),
                 (
                     "name_uk",
                     models.CharField(
-                        default="Імʼя донора",
+                        blank=True,
                         max_length=100,
                         null=True,
                         verbose_name="Імʼя донора",
@@ -50,7 +51,7 @@ class Migration(migrations.Migration):
                 (
                     "name_en",
                     models.CharField(
-                        default="Імʼя донора",
+                        blank=True,
                         max_length=100,
                         null=True,
                         verbose_name="Імʼя донора",
@@ -71,27 +72,21 @@ class Migration(migrations.Migration):
             model_name="partnerlogo",
             name="company_name_en",
             field=models.CharField(
-                default="Назва компанії",
-                max_length=100,
-                null=True,
-                verbose_name="Назва компанії",
+                blank=True, max_length=100, null=True, verbose_name="Назва компанії"
             ),
         ),
         migrations.AddField(
             model_name="partnerlogo",
             name="company_name_uk",
             field=models.CharField(
-                default="Назва компанії",
-                max_length=100,
-                null=True,
-                verbose_name="Назва компанії",
+                blank=True, max_length=100, null=True, verbose_name="Назва компанії"
             ),
         ),
         migrations.AlterField(
             model_name="partnerlogo",
             name="company_name",
             field=models.CharField(
-                default="Назва компанії", max_length=100, verbose_name="Назва компанії"
+                blank=True, max_length=100, null=True, verbose_name="Назва компанії"
             ),
         ),
     ]
