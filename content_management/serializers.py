@@ -50,6 +50,8 @@ class ProjectSerializer(serializers.ModelSerializer):
             "title",
             "image",
             "description",
+            "start_date",
+            "end_date",
             "is_active",
             "is_shown",
             "contents",

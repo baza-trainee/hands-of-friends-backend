@@ -1,3 +1,4 @@
+from django.utils import timezone
 from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework import mixins
@@ -62,6 +63,9 @@ class TenderViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVie
 
     def get_queryset(self):
         queryset = super().get_queryset()
+
+        queryset.filter(end_date__lt=timezone.now()).update(is_active=False)
+
         is_active = self.request.query_params.get("is_active", None)
         is_shown = self.request.query_params.get("is_shown", None)
 
@@ -110,10 +114,12 @@ class TenderViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVie
 class ProjectViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
-    pagination_class = DynamicPagination
 
     def get_queryset(self):
         queryset = super().get_queryset()
+
+        queryset.filter(end_date__lt=timezone.now()).update(is_active=False)
+
         is_active = self.request.query_params.get("is_active", None)
         is_shown = self.request.query_params.get("is_shown", None)
 

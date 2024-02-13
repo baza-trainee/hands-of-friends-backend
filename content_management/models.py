@@ -67,6 +67,8 @@ class Project(models.Model):
         verbose_name=_("Short Description"),
         help_text=TEXT_LENGTH_HELP_TEXT_500,
     )
+    start_date = models.DateField(verbose_name=_("Start Date"))
+    end_date = models.DateField(verbose_name=_("End Date"))
     is_active = models.BooleanField(default=True, verbose_name=_("Is Active"))
     is_shown = models.BooleanField(
         default=True, verbose_name=_("Is Shown"), help_text=IS_SHOWN_HELP_TEXT
