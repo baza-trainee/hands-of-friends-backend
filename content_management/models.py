@@ -7,7 +7,14 @@ from content_management.upload_to_path import UploadToPath
 from validators.image_validation import validate_and_convert_image
 from validators.pdf_validation import validate_pdf_file
 
-from content_management.help_texts import IMAGE_HELP_TEXT, PDF_HELP_TEXT
+from content_management.help_texts import (
+    IMAGE_HELP_TEXT,
+    PDF_HELP_TEXT,
+    TEXT_LENGTH_HELP_TEXT_100,
+    TEXT_LENGTH_HELP_TEXT_200,
+    TEXT_LENGTH_HELP_TEXT_500,
+    IS_SHOWN_HELP_TEXT,
+)
 from ckeditor.fields import RichTextField
 
 
@@ -24,11 +31,16 @@ class Singleton(models.Model):
 
 
 class Tender(models.Model):
-    title = models.CharField(verbose_name=_("Title"))
+    title = models.CharField(
+        max_length=200, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_200
+    )
     description = RichTextField(verbose_name=_("Description"))
     start_date = models.DateField(verbose_name=_("Start Date"))
     end_date = models.DateField(verbose_name=_("End Date"))
     is_active = models.BooleanField(default=True, verbose_name=_("Is Active"))
+    is_shown = models.BooleanField(
+        default=True, verbose_name=_("Is Shown"), help_text=IS_SHOWN_HELP_TEXT
+    )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Updated At"))
 
@@ -49,9 +61,18 @@ class Project(models.Model):
     image = models.FileField(
         upload_to="projects/", verbose_name=_("Image"), help_text=IMAGE_HELP_TEXT
     )
-    title = models.CharField(verbose_name=_("Title"))
-    description = RichTextField(verbose_name=_("Description"))
+    title = models.CharField(
+        max_length=100, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_100
+    )
+    description = RichTextField(
+        max_length=500,
+        verbose_name=_("Short Description"),
+        help_text=TEXT_LENGTH_HELP_TEXT_500,
+    )
     is_active = models.BooleanField(default=True, verbose_name=_("Is Active"))
+    is_shown = models.BooleanField(
+        default=True, verbose_name=_("Is Shown"), help_text=IS_SHOWN_HELP_TEXT
+    )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Updated At"))
 
@@ -75,12 +96,61 @@ class Project(models.Model):
         super().save(*args, **kwargs)
 
 
+class ImageOrTextContent(models.Model):
+    project = models.ForeignKey(
+        "Project",
+        on_delete=models.CASCADE,
+        related_name="contents",
+        verbose_name=_("Project"),
+    )
+    image = models.FileField(
+        upload_to="project_contents/",
+        verbose_name=_("Image"),
+        help_text=IMAGE_HELP_TEXT,
+        blank=True,
+        null=True,
+    )
+    text = RichTextField(
+        blank=True,
+        null=True,
+        verbose_name=_("Text"),
+        help_text=_("Enter text for the content."),
+    )
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Updated At"))
+
+    class Meta:
+        verbose_name = _("Project Content")
+        verbose_name_plural = _("Project Contents")
+
+    def __str__(self):
+        return _(f"Content for {self.project.title}")
+
+    def clean(self):
+        if self.image:
+            try:
+                validate_and_convert_image(self.image)
+            except ValidationError as e:
+                raise ValidationError({"image": e})
+            if not self.image and not self.text:
+                raise ValidationError(_("Please provide either an image or text."))
+        super().clean()
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
+
+
 class TeamMember(models.Model):
     image = models.FileField(
         upload_to="team-members/", verbose_name=_("Image"), help_text=IMAGE_HELP_TEXT
     )
-    full_name = models.CharField(max_length=255, verbose_name=_("Full Name"))
-    position = models.CharField(max_length=255, verbose_name=_("Position"))
+    full_name = models.CharField(
+        max_length=200, verbose_name=_("Full Name"), help_text=TEXT_LENGTH_HELP_TEXT_200
+    )
+    position = models.CharField(
+        max_length=200, verbose_name=_("Position"), help_text=TEXT_LENGTH_HELP_TEXT_200
+    )
     added_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Added At"))
 
     class Meta:
@@ -112,6 +182,7 @@ class PartnerLogo(models.Model):
         null=True,
         blank=True,
         verbose_name=_("Company Name"),
+        help_text=TEXT_LENGTH_HELP_TEXT_100,
     )
     added_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Added At"))
 
@@ -144,6 +215,7 @@ class DonorLogo(models.Model):
         null=True,
         blank=True,
         verbose_name=_("Donor Name"),
+        help_text=TEXT_LENGTH_HELP_TEXT_100,
     )
     added_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Added At"))
 

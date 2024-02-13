@@ -1,11 +1,12 @@
 from django.contrib import admin
 from django.utils.html import mark_safe
 from django.utils.translation import gettext as _
-from modeltranslation.admin import TranslationAdmin
+from modeltranslation.admin import TabbedTranslationAdmin, TranslationStackedInline
 
 from content_management.models import (
     Tender,
     Project,
+    ImageOrTextContent,
     TeamMember,
     PartnerLogo,
     News,
@@ -25,44 +26,50 @@ class ImageAdminMixin:
 
 
 @admin.register(Tender)
-class TenderAdmin(TranslationAdmin):
-    list_display = ("title", "start_date", "is_active")
-    list_filter = ("title", "is_active", "start_date", "end_date")
+class TenderAdmin(TabbedTranslationAdmin):
+    list_display = ("title", "start_date", "end_date", "is_shown")
+    list_filter = ("title", "start_date", "end_date")
+    exclude = ("is_active",)
     search_fields = ("title", "date")
     group_fieldsets = True
 
 
+class ImageOrTextContentInline(TranslationStackedInline):
+    model = ImageOrTextContent
+    extra = 1
+
+
 @admin.register(Project)
-class ProjectAdmin(TranslationAdmin, ImageAdminMixin):
-    list_display = ("title", "is_active", "image_tag")
-    list_filter = ("is_active",)
+class ProjectAdmin(TabbedTranslationAdmin, ImageAdminMixin):
+    list_display = ("title", "image_tag", "is_shown")
+    list_filter = ("is_active", "is_shown")
+    inlines = (ImageOrTextContentInline,)
+    exclude = ("is_active",)
     search_fields = ("title",)
     group_fieldsets = True
 
 
 @admin.register(TeamMember)
-class TeamMemberAdmin(TranslationAdmin, ImageAdminMixin):
+class TeamMemberAdmin(TabbedTranslationAdmin, ImageAdminMixin):
     list_display = ("full_name", "position", "image_tag")
     list_filter = ("position",)
     search_fields = ("full_name", "position")
-    group_fieldsets = True
 
 
 @admin.register(PartnerLogo)
-class PartnerLogoAdmin(TranslationAdmin, ImageAdminMixin):
+class PartnerLogoAdmin(TabbedTranslationAdmin, ImageAdminMixin):
     list_display = ("company_name", "image_tag")
     search_fields = ("company_name",)
 
 
 @admin.register(DonorLogo)
-class DonorLogoAdmin(TranslationAdmin, ImageAdminMixin):
+class DonorLogoAdmin(TabbedTranslationAdmin, ImageAdminMixin):
     list_display = ("name", "image_tag")
     search_fields = ("name",)
-    group_fieldsets = True
 
 
 @admin.register(News)
-class NewsAdmin(TranslationAdmin, ImageAdminMixin):
+class NewsAdmin(TabbedTranslationAdmin, ImageAdminMixin):
     list_display = ("title", "date", "image_tag")
     list_filter = ("date",)
     search_fields = ("title", "date")
@@ -70,7 +77,7 @@ class NewsAdmin(TranslationAdmin, ImageAdminMixin):
 
 
 @admin.register(Contacts)
-class ContactsAdmin(TranslationAdmin):
+class ContactsAdmin(TabbedTranslationAdmin):
     """Contacts Admin with singleton pattern"""
 
     list_display = ("phone_number", "email", "youtube_link", "facebook_link", "address")

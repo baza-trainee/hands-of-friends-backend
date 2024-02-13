@@ -9,6 +9,7 @@ from content_management.models import (
     News,
     Contacts,
     PDFReport,
+    ImageOrTextContent,
 )
 
 
@@ -28,7 +29,19 @@ class TenderSerializer(serializers.ModelSerializer):
         )
 
 
+class ImageOrTextSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ImageOrTextContent
+        fields = (
+            "id",
+            "image",
+            "text",
+        )
+
+
 class ProjectSerializer(serializers.ModelSerializer):
+    contents = ImageOrTextSerializer(many=True)
+
     class Meta:
         model = Project
         fields = (
@@ -37,6 +50,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "image",
             "description",
             "is_active",
+            "contents",
         )
 
 
