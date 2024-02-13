@@ -26,6 +26,7 @@ class TenderSerializer(serializers.ModelSerializer):
             "start_date",
             "end_date",
             "is_active",
+            "is_shown",
         )
 
 
@@ -50,6 +51,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "image",
             "description",
             "is_active",
+            "is_shown",
             "contents",
         )
 

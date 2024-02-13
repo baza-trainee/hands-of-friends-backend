@@ -63,10 +63,16 @@ class TenderViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVie
     def get_queryset(self):
         queryset = super().get_queryset()
         is_active = self.request.query_params.get("is_active", None)
+        is_shown = self.request.query_params.get("is_shown", None)
 
         if is_active is not None:
             queryset = queryset.filter(
                 is_active=True if is_active.lower() == "true" else False
+            )
+
+        if is_shown is not None:
+            queryset = queryset.filter(
+                is_shown=True if is_shown.lower() == "true" else False
             )
 
         return queryset
@@ -77,7 +83,12 @@ class TenderViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVie
                 "is_active",
                 type=OpenApiTypes.STR,
                 description="Filter by is_active field true, false (ex. ?is_active=true)",
-            )
+            ),
+            OpenApiParameter(
+                "is_shown",
+                type=OpenApiTypes.STR,
+                description="Filter by is_shown field true, false (ex. ?is_shown=true)",
+            ),
         ]
     )
     def list(self, request, *args, **kwargs):
@@ -104,10 +115,16 @@ class ProjectViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVi
     def get_queryset(self):
         queryset = super().get_queryset()
         is_active = self.request.query_params.get("is_active", None)
+        is_shown = self.request.query_params.get("is_shown", None)
 
         if is_active is not None:
             queryset = queryset.filter(
                 is_active=True if is_active.lower() == "true" else False
+            )
+
+        if is_shown is not None:
+            queryset = queryset.filter(
+                is_shown=True if is_shown.lower() == "true" else False
             )
 
         return queryset
@@ -118,7 +135,12 @@ class ProjectViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVi
                 "is_active",
                 type=OpenApiTypes.STR,
                 description="Filter by is_active field true, false (ex. ?is_active=true)",
-            )
+            ),
+            OpenApiParameter(
+                "is_shown",
+                type=OpenApiTypes.STR,
+                description="Filter by is_shown field true, false (ex. ?is_shown=true)",
+            ),
         ]
     )
     def list(self, request, *args, **kwargs):
