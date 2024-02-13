@@ -62,7 +62,7 @@ class Project(models.Model):
         upload_to="projects/", verbose_name=_("Image"), help_text=IMAGE_HELP_TEXT
     )
     title = models.CharField(
-        max_length=100, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_100
+        max_length=200, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_200
     )
     description = RichTextField(
         max_length=500,
