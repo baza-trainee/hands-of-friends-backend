@@ -61,9 +61,7 @@ class Project(models.Model):
     image = models.FileField(
         upload_to="projects/", verbose_name=_("Image"), help_text=IMAGE_HELP_TEXT
     )
-    title = models.CharField(
-        max_length=100, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_100
-    )
+    title = models.CharField(verbose_name=_("Title"))
     description = RichTextField(
         max_length=500,
         verbose_name=_("Short Description"),
