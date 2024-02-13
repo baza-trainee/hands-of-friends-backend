@@ -12,6 +12,7 @@ from content_management.help_texts import (
     PDF_HELP_TEXT,
     TEXT_LENGTH_HELP_TEXT_100,
     TEXT_LENGTH_HELP_TEXT_200,
+    TEXT_LENGTH_HELP_TEXT_500,
     IS_SHOWN_HELP_TEXT,
 )
 from ckeditor.fields import RichTextField
@@ -63,7 +64,11 @@ class Project(models.Model):
     title = models.CharField(
         max_length=100, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_100
     )
-    description = RichTextField(verbose_name=_("Description"))
+    description = RichTextField(
+        max_length=500,
+        verbose_name=_("Short Description"),
+        help_text=TEXT_LENGTH_HELP_TEXT_500,
+    )
     is_active = models.BooleanField(default=True, verbose_name=_("Is Active"))
     is_shown = models.BooleanField(
         default=True, verbose_name=_("Is Shown"), help_text=IS_SHOWN_HELP_TEXT
