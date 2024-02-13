@@ -12,6 +12,7 @@ from content_management.help_texts import (
     PDF_HELP_TEXT,
     TEXT_LENGTH_HELP_TEXT_100,
     TEXT_LENGTH_HELP_TEXT_200,
+    IS_SHOWN_HELP_TEXT,
 )
 from ckeditor.fields import RichTextField
 
@@ -36,6 +37,9 @@ class Tender(models.Model):
     start_date = models.DateField(verbose_name=_("Start Date"))
     end_date = models.DateField(verbose_name=_("End Date"))
     is_active = models.BooleanField(default=True, verbose_name=_("Is Active"))
+    is_shown = models.BooleanField(
+        default=True, verbose_name=_("Is Shown"), help_text=IS_SHOWN_HELP_TEXT
+    )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Updated At"))
 
@@ -61,6 +65,9 @@ class Project(models.Model):
     )
     description = RichTextField(verbose_name=_("Description"))
     is_active = models.BooleanField(default=True, verbose_name=_("Is Active"))
+    is_shown = models.BooleanField(
+        default=True, verbose_name=_("Is Shown"), help_text=IS_SHOWN_HELP_TEXT
+    )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Updated At"))
 

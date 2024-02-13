@@ -26,16 +26,18 @@ class ImageAdminMixin:
 
 @admin.register(Tender)
 class TenderAdmin(TranslationAdmin):
-    list_display = ("title", "start_date", "is_active")
-    list_filter = ("title", "is_active", "start_date", "end_date")
+    list_display = ("title", "start_date", "end_date", "is_shown")
+    list_filter = ("title", "start_date", "end_date")
+    exclude = ("is_active",)
     search_fields = ("title", "date")
     group_fieldsets = True
 
 
 @admin.register(Project)
 class ProjectAdmin(TranslationAdmin, ImageAdminMixin):
-    list_display = ("title", "is_active", "image_tag")
-    list_filter = ("is_active",)
+    list_display = ("title", "image_tag", "is_shown")
+    list_filter = ("is_active", "is_shown")
+    exclude = ("is_active",)
     search_fields = ("title",)
     group_fieldsets = True
 
