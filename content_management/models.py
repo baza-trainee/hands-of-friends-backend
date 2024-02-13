@@ -127,12 +127,13 @@ class ImageOrTextContent(models.Model):
         return _(f"Content for {self.project.title}")
 
     def clean(self):
-        try:
-            validate_and_convert_image(self.image)
-        except ValidationError as e:
-            raise ValidationError({"image": e})
-        if not self.image and not self.text:
-            raise ValidationError(_("Please provide either an image or text."))
+        if self.image:
+            try:
+                validate_and_convert_image(self.image)
+            except ValidationError as e:
+                raise ValidationError({"image": e})
+            if not self.image and not self.text:
+                raise ValidationError(_("Please provide either an image or text."))
         super().clean()
 
     def save(self, *args, **kwargs):
