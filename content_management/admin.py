@@ -1,11 +1,12 @@
 from django.contrib import admin
 from django.utils.html import mark_safe
 from django.utils.translation import gettext as _
-from modeltranslation.admin import TranslationAdmin
+from modeltranslation.admin import TranslationAdmin, TranslationStackedInline
 
 from content_management.models import (
     Tender,
     Project,
+    ImageOrTextContent,
     TeamMember,
     PartnerLogo,
     News,
@@ -33,10 +34,16 @@ class TenderAdmin(TranslationAdmin):
     group_fieldsets = True
 
 
+class ImageOrTextContentInline(TranslationStackedInline):
+    model = ImageOrTextContent
+    extra = 1
+
+
 @admin.register(Project)
 class ProjectAdmin(TranslationAdmin, ImageAdminMixin):
     list_display = ("title", "image_tag", "is_shown")
     list_filter = ("is_active", "is_shown")
+    inlines = (ImageOrTextContentInline,)
     exclude = ("is_active",)
     search_fields = ("title",)
     group_fieldsets = True

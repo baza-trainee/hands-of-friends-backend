@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-13 13:16+0000\n"
+"POT-Creation-Date: 2024-02-13 15:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
 "(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
-#: content_management/admin.py:24
+#: content_management/admin.py:25
 msgid "Image Preview"
 msgstr "Попередній перегляд зображення"
 
@@ -50,188 +50,215 @@ msgid "Максимальна довжина тексту: 200 символів.
 msgstr ""
 
 #: content_management/help_texts.py:18
+msgid "Максимальна довжина тексту: 500 символів."
+msgstr ""
+
+#: content_management/help_texts.py:19
 msgid "Позначте, якщо ви хочете, щоб цей об'єкт був видимим на сайті."
 msgstr ""
 
 # python-brace-format
-#: content_management/models.py:27
+#: content_management/models.py:28
 #, python-brace-format
 msgid "Only one {self.__class__.__name__} instance is allowed."
 msgstr "Дозволений лише один екземпляр {self.__class__.__name__}."
 
-#: content_management/models.py:34 content_management/models.py:64
-#: content_management/models.py:197 content_management/models.py:238
+#: content_management/models.py:35 content_management/models.py:65
+#: content_management/models.py:246 content_management/models.py:287
 msgid "Title"
 msgstr "Назва"
 
-#: content_management/models.py:36 content_management/models.py:66
-#: content_management/models.py:198
+#: content_management/models.py:37 content_management/models.py:247
 msgid "Description"
 msgstr "Опис"
 
-#: content_management/models.py:37
+#: content_management/models.py:38
 msgid "Start Date"
 msgstr "Дата початку"
 
-#: content_management/models.py:38
+#: content_management/models.py:39
 msgid "End Date"
 msgstr "Дата завершення"
 
-#: content_management/models.py:39 content_management/models.py:67
+#: content_management/models.py:40 content_management/models.py:72
 msgid "Is Active"
 msgstr "Активний"
 
-#: content_management/models.py:41 content_management/models.py:69
+#: content_management/models.py:42 content_management/models.py:74
 msgid "Is Shown"
 msgstr "Показувати на сайті"
 
-#: content_management/models.py:43 content_management/models.py:71
+#: content_management/models.py:44 content_management/models.py:76
+#: content_management/models.py:119
 msgid "Created At"
 msgstr "Створено"
 
-#: content_management/models.py:44 content_management/models.py:72
+#: content_management/models.py:45 content_management/models.py:77
+#: content_management/models.py:120
 msgid "Updated At"
 msgstr "Оновлено"
 
-#: content_management/models.py:48
+#: content_management/models.py:49
 msgid "Tender"
 msgstr "Тендер"
 
-#: content_management/models.py:49
+#: content_management/models.py:50
 msgid "Tenders"
 msgstr "Тендери"
 
-#: content_management/models.py:56
+#: content_management/models.py:57
 msgid "Start date cannot be after end date."
 msgstr "Дата початку не може бути після дати завершення."
 
-#: content_management/models.py:61 content_management/models.py:96
-#: content_management/models.py:128 content_management/models.py:161
-#: content_management/models.py:194
+#: content_management/models.py:62 content_management/models.py:108
+#: content_management/models.py:145 content_management/models.py:177
+#: content_management/models.py:210 content_management/models.py:243
 msgid "Image"
 msgstr "Зображення"
 
-#: content_management/models.py:76
+#: content_management/models.py:69
+msgid "Short Description"
+msgstr "Короткий Опис"
+
+#: content_management/models.py:81 content_management/models.py:104
 msgid "Project"
 msgstr "Проєкт"
 
-#: content_management/models.py:77
+#: content_management/models.py:82
 msgid "Projects"
 msgstr "Проєкти"
 
-#: content_management/models.py:99
+#: content_management/models.py:116
+msgid "Text"
+msgstr "Текст"
+
+#: content_management/models.py:117
+msgid "Enter text for the content."
+msgstr "Введіть контент."
+
+#: content_management/models.py:123
+msgid "Project Content"
+msgstr "Контент"
+
+#: content_management/models.py:124
+msgid "Project Contents"
+msgstr "Контент"
+
+#: content_management/models.py:127
+#, python-brace-format
+msgid "Content for {self.project.title}"
+msgstr "Контент для {self.project.title}"
+
+#: content_management/models.py:135
+msgid "Please provide either an image or text."
+msgstr "Будь ласка, вкажіть або зображення, або текст."
+
+#: content_management/models.py:148
 msgid "Full Name"
 msgstr "Повне ім'я"
 
-#: content_management/models.py:102
+#: content_management/models.py:151
 msgid "Position"
 msgstr "Посада"
 
-#: content_management/models.py:104 content_management/models.py:137
-#: content_management/models.py:170 content_management/models.py:200
-#: content_management/models.py:244
+#: content_management/models.py:153 content_management/models.py:186
+#: content_management/models.py:219 content_management/models.py:249
+#: content_management/models.py:293
 msgid "Added At"
 msgstr "Додано"
 
-#: content_management/models.py:108
+#: content_management/models.py:157
 msgid "Team member"
 msgstr "Член команди"
 
-#: content_management/models.py:109
+#: content_management/models.py:158
 msgid "Team members"
 msgstr "Команда"
 
-#: content_management/models.py:134
+#: content_management/models.py:183
 msgid "Company Name"
 msgstr "Назва компанії"
 
-#: content_management/models.py:141
+#: content_management/models.py:190
 msgid "Partner logo"
 msgstr "Логотип партнера"
 
-#: content_management/models.py:142
+#: content_management/models.py:191
 msgid "Partner logos"
 msgstr "Логотипи партнерів"
 
 # python-brace-format
-#: content_management/models.py:145
+#: content_management/models.py:194
 #, python-brace-format
 msgid "{self.company_name} logo"
 msgstr "Логотип {self.company_name}"
 
-#: content_management/models.py:167
+#: content_management/models.py:216
 msgid "Donor Name"
 msgstr "Імʼя донора"
 
-#: content_management/models.py:174
+#: content_management/models.py:223
 msgid "Donor logo"
 msgstr "Логотип донора"
 
-#: content_management/models.py:175
+#: content_management/models.py:224
 msgid "Donor logos"
 msgstr "Логотипи донорів"
 
 # python-brace-format
-#: content_management/models.py:178
+#: content_management/models.py:227
 #, python-brace-format
 msgid "{self.name} logo"
 msgstr "Логотип {self.company_name}"
 
-#: content_management/models.py:196
+#: content_management/models.py:245
 msgid "Date"
 msgstr "Дата"
 
-#: content_management/models.py:199
+#: content_management/models.py:248
 msgid "Link to News"
 msgstr "Посилання на новини"
 
-#: content_management/models.py:204 content_management/models.py:205
+#: content_management/models.py:253 content_management/models.py:254
 msgid "News"
 msgstr "Новини"
 
-#: content_management/models.py:223
+#: content_management/models.py:272
 msgid "Phone Number"
 msgstr "Номер телефону"
 
-#: content_management/models.py:224
+#: content_management/models.py:273
 msgid "Email"
 msgstr "Електронна пошта"
 
-#: content_management/models.py:225
+#: content_management/models.py:274
 msgid "Youtube Link"
 msgstr "Посилання на Youtube"
 
-#: content_management/models.py:226
+#: content_management/models.py:275
 msgid "Facebook Link"
 msgstr "Посилання на Facebook"
 
-#: content_management/models.py:227
+#: content_management/models.py:276
 msgid "Address"
 msgstr "Адреса"
 
-#: content_management/models.py:230
+#: content_management/models.py:279
 msgid "Contact"
 msgstr "Контакт"
 
-#: content_management/models.py:231 content_management/models.py:234
+#: content_management/models.py:280 content_management/models.py:283
 msgid "Contacts"
 msgstr "Контакти"
 
-#: content_management/models.py:241
+#: content_management/models.py:290
 msgid "File URL"
 msgstr "URL файлу"
 
-#: content_management/models.py:247
+#: content_management/models.py:296
 msgid "PDF report"
 msgstr "Звітність"
 
-#: content_management/models.py:248
+#: content_management/models.py:297
 msgid "PDF reports"
 msgstr "Звітність"
-
-#~ msgid "Is Hidden"
-#~ msgstr "Прихований"
-
-#~| msgid "Description"
-#~ msgid "Short Description"
-#~ msgstr "Короткий Опис"

@@ -7,6 +7,7 @@ from content_management.models import (
     Contacts,
     PartnerLogo,
     DonorLogo,
+    ImageOrTextContent,
 )
 
 
@@ -18,6 +19,11 @@ class TenderTranslationOptions(TranslationOptions):
 @register(Project)
 class ProjectTranslationOptions(TranslationOptions):
     fields = ("title", "description")
+
+
+@register(ImageOrTextContent)
+class ImageOrTextContentTranslationOptions(TranslationOptions):
+    fields = ("text",)
 
 
 @register(TeamMember)

@@ -96,6 +96,50 @@ class Project(models.Model):
         super().save(*args, **kwargs)
 
 
+class ImageOrTextContent(models.Model):
+    project = models.ForeignKey(
+        "Project",
+        on_delete=models.CASCADE,
+        related_name="contents",
+        verbose_name=_("Project"),
+    )
+    image = models.FileField(
+        upload_to="project_contents/",
+        verbose_name=_("Image"),
+        help_text=IMAGE_HELP_TEXT,
+        blank=True,
+        null=True,
+    )
+    text = RichTextField(
+        blank=True,
+        null=True,
+        verbose_name=_("Text"),
+        help_text=_("Enter text for the content."),
+    )
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Updated At"))
+
+    class Meta:
+        verbose_name = _("Project Content")
+        verbose_name_plural = _("Project Contents")
+
+    def __str__(self):
+        return _(f"Content for {self.project.title}")
+
+    def clean(self):
+        try:
+            validate_and_convert_image(self.image)
+        except ValidationError as e:
+            raise ValidationError({"image": e})
+        if not self.image and not self.text:
+            raise ValidationError(_("Please provide either an image or text."))
+        super().clean()
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
+
+
 class TeamMember(models.Model):
     image = models.FileField(
         upload_to="team-members/", verbose_name=_("Image"), help_text=IMAGE_HELP_TEXT
