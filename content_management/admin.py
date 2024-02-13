@@ -54,7 +54,6 @@ class TeamMemberAdmin(TabbedTranslationAdmin, ImageAdminMixin):
     list_display = ("full_name", "position", "image_tag")
     list_filter = ("position",)
     search_fields = ("full_name", "position")
-    group_fieldsets = True
 
 
 @admin.register(PartnerLogo)
