@@ -7,7 +7,12 @@ from content_management.upload_to_path import UploadToPath
 from validators.image_validation import validate_and_convert_image
 from validators.pdf_validation import validate_pdf_file
 
-from content_management.help_texts import IMAGE_HELP_TEXT, PDF_HELP_TEXT
+from content_management.help_texts import (
+    IMAGE_HELP_TEXT,
+    PDF_HELP_TEXT,
+    TEXT_LENGTH_HELP_TEXT_100,
+    TEXT_LENGTH_HELP_TEXT_200,
+)
 from ckeditor.fields import RichTextField
 
 
@@ -24,7 +29,9 @@ class Singleton(models.Model):
 
 
 class Tender(models.Model):
-    title = models.CharField(max_length=200, verbose_name=_("Title"))
+    title = models.CharField(
+        max_length=200, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_200
+    )
     description = RichTextField(verbose_name=_("Description"))
     start_date = models.DateField(verbose_name=_("Start Date"))
     end_date = models.DateField(verbose_name=_("End Date"))
@@ -49,7 +56,9 @@ class Project(models.Model):
     image = models.FileField(
         upload_to="projects/", verbose_name=_("Image"), help_text=IMAGE_HELP_TEXT
     )
-    title = models.CharField(verbose_name=_("Title"))
+    title = models.CharField(
+        max_length=100, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_100
+    )
     description = RichTextField(verbose_name=_("Description"))
     is_active = models.BooleanField(default=True, verbose_name=_("Is Active"))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
@@ -79,8 +88,12 @@ class TeamMember(models.Model):
     image = models.FileField(
         upload_to="team-members/", verbose_name=_("Image"), help_text=IMAGE_HELP_TEXT
     )
-    full_name = models.CharField(max_length=255, verbose_name=_("Full Name"))
-    position = models.CharField(max_length=255, verbose_name=_("Position"))
+    full_name = models.CharField(
+        max_length=200, verbose_name=_("Full Name"), help_text=TEXT_LENGTH_HELP_TEXT_200
+    )
+    position = models.CharField(
+        max_length=200, verbose_name=_("Position"), help_text=TEXT_LENGTH_HELP_TEXT_200
+    )
     added_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Added At"))
 
     class Meta:
@@ -112,6 +125,7 @@ class PartnerLogo(models.Model):
         null=True,
         blank=True,
         verbose_name=_("Company Name"),
+        help_text=TEXT_LENGTH_HELP_TEXT_100,
     )
     added_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Added At"))
 
@@ -144,6 +158,7 @@ class DonorLogo(models.Model):
         null=True,
         blank=True,
         verbose_name=_("Donor Name"),
+        help_text=TEXT_LENGTH_HELP_TEXT_100,
     )
     added_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Added At"))
 
