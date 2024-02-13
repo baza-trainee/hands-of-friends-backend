@@ -205,12 +205,6 @@ msgstr "Логотип донора"
 msgid "Donor logos"
 msgstr "Логотипи донорів"
 
-# python-brace-format
-#: content_management/models.py:227
-#, python-brace-format
-msgid "{self.name} logo"
-msgstr "Логотип {self.company_name}"
-
 #: content_management/models.py:245
 msgid "Date"
 msgstr "Дата"
