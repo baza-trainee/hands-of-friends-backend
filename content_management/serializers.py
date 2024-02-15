@@ -43,7 +43,7 @@ class ImageOrTextSerializer(serializers.ModelSerializer):
 
 
 class ProjectSerializer(serializers.ModelSerializer):
-    contents = ImageOrTextSerializer(many=True)
+    content = ImageOrTextSerializer(many=True)
 
     class Meta:
         model = Project
@@ -56,7 +56,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "end_date",
             "is_active",
             "is_shown",
-            "contents",
+            "content",
         )
 
 
