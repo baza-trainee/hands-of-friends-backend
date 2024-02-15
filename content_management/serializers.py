@@ -11,6 +11,7 @@ from content_management.models import (
     PDFReport,
     ImageOrTextContent,
     HeroSlider,
+    AboutUs,
 )
 
 
@@ -136,3 +137,9 @@ class HeroSliderSerializer(serializers.ModelSerializer):
             "image",
             "alt_text",
         )
+
+
+class AboutUsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AboutUs
+        fields = ("id", "history", "principles", "values")
