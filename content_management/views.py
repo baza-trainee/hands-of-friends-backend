@@ -243,6 +243,18 @@ class ContactsViewSet(mixins.ListModelMixin, GenericViewSet):
     serializer_class = ContactsSerializer
 
 
+@extend_schema(
+    parameters=[
+        OpenApiParameter(
+            name="Accept-Language",
+            type=OpenApiTypes.STR,
+            location=OpenApiParameter.HEADER,
+            required=False,
+            description="Language code to get the content in a specific language (e.g., en, uk)",
+            enum=["en", "uk"],
+        ),
+    ]
+)
 class PDFReportView(mixins.ListModelMixin, GenericViewSet):
     queryset = PDFReport.objects.all()
     serializer_class = PDFReportSerializer

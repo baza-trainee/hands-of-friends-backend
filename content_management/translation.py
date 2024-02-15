@@ -10,6 +10,7 @@ from content_management.models import (
     ImageOrTextContent,
     HeroSlider,
     AboutUs,
+    PDFReport
 )
 
 
@@ -61,3 +62,8 @@ class HeroSliderTranslationOptions(TranslationOptions):
 @register(AboutUs)
 class AboutUsTranslationOptions(TranslationOptions):
     fields = ("history", "principles", "values")
+
+
+@register(PDFReport)
+class PDFReportTranslationOptions(TranslationOptions):
+    fields = ("title",)
