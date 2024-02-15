@@ -14,7 +14,8 @@ from content_management.models import (
     Contacts,
     PDFReport,
     DonorLogo,
-    HeroSlider, AboutUs,
+    HeroSlider,
+    AboutUs,
 )
 from content_management.serializers import (
     TenderSerializer,
@@ -25,7 +26,8 @@ from content_management.serializers import (
     ContactsSerializer,
     PDFReportSerializer,
     DonorLogoSerializer,
-    HeroSliderSerializer, AboutUsSerializer,
+    HeroSliderSerializer,
+    AboutUsSerializer,
 )
 
 

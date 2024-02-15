@@ -116,5 +116,22 @@ class HeroSliderAdmin(TabbedTranslationAdmin, ImageAdminMixin):
 
 @admin.register(AboutUs)
 class AboutUsAdmin(TabbedTranslationAdmin):
-    list_display = ("history", "principles", "values")
+    list_display = ("display_custom_text",)
     group_fieldsets = True
+
+    def display_custom_text(self, obj) -> str:
+        return "Редагувати текст про нас"
+
+    display_custom_text.short_description = "Текст про нас"
+
+    def get_actions(self, request):
+        # Disable all actions
+        return None
+
+    def has_add_permission(self, request, obj=None):
+        if AboutUs.objects.exists():
+            return False
+        return True
+
+    def has_delete_permission(self, request, obj=None):
+        return False
