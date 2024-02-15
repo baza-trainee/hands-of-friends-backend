@@ -76,6 +76,13 @@ class NewsAdmin(TabbedTranslationAdmin, ImageAdminMixin):
     group_fieldsets = True
 
 
+@admin.register(PDFReport)
+class PDFReportAdmin(admin.ModelAdmin):
+    """PDFReport Admin"""
+
+    list_display = ("title", "file_url", "added_at")
+
+
 @admin.register(Contacts)
 class ContactsAdmin(TabbedTranslationAdmin):
     """Contacts Admin with singleton pattern"""
@@ -84,21 +91,6 @@ class ContactsAdmin(TabbedTranslationAdmin):
 
     def has_add_permission(self, request, obj=None):
         if Contacts.objects.exists():
-            return False
-        return True
-
-    def has_delete_permission(self, request, obj=None):
-        return False
-
-
-@admin.register(PDFReport)
-class PDFReportAdmin(admin.ModelAdmin):
-    """PDFReport Admin with singleton pattern"""
-
-    list_display = ("title", "file_url", "added_at")
-
-    def has_add_permission(self, request, obj=None):
-        if PDFReport.objects.exists():
             return False
         return True
 

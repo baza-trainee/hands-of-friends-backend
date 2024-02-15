@@ -198,7 +198,7 @@ class PartnerLogo(models.Model):
         verbose_name_plural = _("Partner logos")
 
     def __str__(self):
-        return _(f"{self.company_name} logo")
+        return f"{self.company_name} logo"
 
     def clean(self):
         try:
@@ -233,7 +233,7 @@ class DonorLogo(models.Model):
         verbose_name_plural = _("Donor logos")
 
     def __str__(self):
-        return _(f"{self.name} logo")
+        return f"{self.name} logo"
 
     def clean(self):
         try:
@@ -294,8 +294,10 @@ class Contacts(Singleton):
         return _("Contacts")
 
 
-class PDFReport(Singleton):
-    title = models.CharField(max_length=255, verbose_name=_("Title"))
+class PDFReport(models.Model):
+    title = models.CharField(
+        max_length=200, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_200
+    )
     file_url = models.FileField(
         upload_to=UploadToPath("pdf-report/"),
         verbose_name=_("File URL"),
@@ -304,8 +306,8 @@ class PDFReport(Singleton):
     added_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Added At"))
 
     class Meta:
-        verbose_name = _("PDF report")
-        verbose_name_plural = _("PDF reports")
+        verbose_name = _("Document")
+        verbose_name_plural = _("Documents")
 
     def __str__(self):
         return f"{self.title}"

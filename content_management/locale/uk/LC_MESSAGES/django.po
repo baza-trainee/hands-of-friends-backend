@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-15 13:58+0000\n"
+"POT-Creation-Date: 2024-02-15 14:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,7 +64,7 @@ msgid "Only one {self.__class__.__name__} instance is allowed."
 msgstr "Дозволений лише один екземпляр {self.__class__.__name__}."
 
 #: content_management/models.py:35 content_management/models.py:67
-#: content_management/models.py:257 content_management/models.py:298
+#: content_management/models.py:257 content_management/models.py:299
 msgid "Title"
 msgstr "Назва"
 
@@ -163,7 +163,7 @@ msgstr "Посада"
 
 #: content_management/models.py:159 content_management/models.py:193
 #: content_management/models.py:228 content_management/models.py:260
-#: content_management/models.py:304
+#: content_management/models.py:306
 msgid "Added At"
 msgstr "Додано"
 
@@ -186,12 +186,6 @@ msgstr "Логотип партнера"
 #: content_management/models.py:198
 msgid "Partner logos"
 msgstr "Логотипи партнерів"
-
-# python-brace-format
-#: content_management/models.py:201
-#, python-brace-format
-msgid "{self.company_name} logo"
-msgstr "Логотип {self.company_name}"
 
 #: content_management/models.py:225
 msgid "Donor Name"
@@ -245,14 +239,20 @@ msgstr "Контакт"
 msgid "Contacts"
 msgstr "Контакти"
 
-#: content_management/models.py:301
+#: content_management/models.py:303
 msgid "File URL"
 msgstr "URL файлу"
 
-#: content_management/models.py:307
-msgid "PDF report"
-msgstr "Звітність"
+#: content_management/models.py:309
+msgid "Document"
+msgstr "Документ"
 
-#: content_management/models.py:308
-msgid "PDF reports"
-msgstr "Звітність"
+#: content_management/models.py:310
+msgid "Documents"
+msgstr "Документи"
+
+#~ msgid "PDF report"
+#~ msgstr "Звітність"
+
+#~ msgid "PDF reports"
+#~ msgstr "Звітність"
