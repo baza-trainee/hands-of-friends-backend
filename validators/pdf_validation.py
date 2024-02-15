@@ -17,11 +17,11 @@ def validate_pdf_file(file_field: FieldFile) -> None:
     """Validate that a file is a PDF and its size is within the limit."""
     if not is_pdf(file_field.name):
         raise ValidationError(
-            _("Unsupported file extension. Allowed extension is pdf.")
+            "Непідтримуваний розширення файлу. Дозволене розширення: pdf."
         )
 
     file_size = FileUtility.get_file_size(file_field)
     if file_size > MAX_FILE_SIZE:
         raise ValidationError(
-            _(f"PDF size is too large. Max size is {MAX_FILE_SIZE / 1024 / 1024} MB.")
+            f"Розмір PDF занадто великий. Максимальний розмір: {MAX_FILE_SIZE / 1024 / 1024} MB."
         )

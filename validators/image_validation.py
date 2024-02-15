@@ -39,7 +39,7 @@ def validate_image_size(image_field: FieldFile) -> None:
     file_size = FileUtility.get_file_size(image_field)
     if file_size > MAX_FILE_SIZE:
         raise ValidationError(
-            _(f"Image size is too large. Max size is {MAX_FILE_SIZE / 1024 / 1024} MB.")
+            f"Розмір зображення занадто великий. Максимальний розмір: {MAX_FILE_SIZE / 1024 / 1024} МБ."
         )
 
 
@@ -49,9 +49,7 @@ def validate_and_convert_image(image_field: FieldFile) -> None:
 
     if not is_valid_image_extension(file_name):
         raise ValidationError(
-            _(
-                "Unsupported file extension. Allowed extensions are jpg, jpeg, webp, png, svg."
-            )
+            "Непідтримуваний розширення файлу. Дозволені розширення: jpg, jpeg, webp, png, svg."
         )
 
     file_extension = FileUtility.get_file_extension(file_name)
@@ -76,4 +74,6 @@ def validate_and_convert_image(image_field: FieldFile) -> None:
         validate_image_size(image_field)
 
     except Exception:
-        raise ValidationError(_("Invalid image format."))
+        raise ValidationError(
+            "Недійсний формат зображення. Дозволені формати: jpg, jpeg, webp, png, svg."
+        )
