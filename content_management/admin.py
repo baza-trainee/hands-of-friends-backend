@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import mark_safe
 from django.utils.translation import gettext as _
-from modeltranslation.admin import TabbedTranslationAdmin, TranslationStackedInline
+from modeltranslation.admin import TranslationAdmin, TranslationStackedInline
 
 from content_management.models import (
     Tender,
@@ -28,7 +28,7 @@ class ImageAdminMixin:
 
 
 @admin.register(Tender)
-class TenderAdmin(TabbedTranslationAdmin):
+class TenderAdmin(TranslationAdmin):
     list_display = ("title", "start_date", "end_date", "is_shown")
     list_filter = ("title", "start_date", "end_date")
     exclude = ("is_active",)
@@ -42,7 +42,7 @@ class ImageOrTextContentInline(TranslationStackedInline):
 
 
 @admin.register(Project)
-class ProjectAdmin(TabbedTranslationAdmin, ImageAdminMixin):
+class ProjectAdmin(TranslationAdmin, ImageAdminMixin):
     list_display = ("title", "image_tag", "is_shown")
     list_filter = ("is_active", "is_shown")
     inlines = (ImageOrTextContentInline,)
@@ -52,26 +52,26 @@ class ProjectAdmin(TabbedTranslationAdmin, ImageAdminMixin):
 
 
 @admin.register(TeamMember)
-class TeamMemberAdmin(TabbedTranslationAdmin, ImageAdminMixin):
+class TeamMemberAdmin(TranslationAdmin, ImageAdminMixin):
     list_display = ("full_name", "position", "image_tag")
     list_filter = ("position",)
     search_fields = ("full_name", "position")
 
 
 @admin.register(PartnerLogo)
-class PartnerLogoAdmin(TabbedTranslationAdmin, ImageAdminMixin):
+class PartnerLogoAdmin(TranslationAdmin, ImageAdminMixin):
     list_display = ("company_name", "image_tag")
     search_fields = ("company_name",)
 
 
 @admin.register(DonorLogo)
-class DonorLogoAdmin(TabbedTranslationAdmin, ImageAdminMixin):
+class DonorLogoAdmin(TranslationAdmin, ImageAdminMixin):
     list_display = ("name", "image_tag")
     search_fields = ("name",)
 
 
 @admin.register(News)
-class NewsAdmin(TabbedTranslationAdmin, ImageAdminMixin):
+class NewsAdmin(TranslationAdmin, ImageAdminMixin):
     list_display = ("title", "date", "image_tag")
     list_filter = ("date",)
     search_fields = ("title", "date")
@@ -86,7 +86,7 @@ class PDFReportAdmin(admin.ModelAdmin):
 
 
 @admin.register(Contacts)
-class ContactsAdmin(TabbedTranslationAdmin):
+class ContactsAdmin(TranslationAdmin):
     """Contacts Admin with singleton pattern"""
 
     list_display = ("phone_number", "email", "youtube_link", "facebook_link", "address")
@@ -101,7 +101,7 @@ class ContactsAdmin(TabbedTranslationAdmin):
 
 
 @admin.register(HeroSlider)
-class HeroSliderAdmin(TabbedTranslationAdmin, ImageAdminMixin):
+class HeroSliderAdmin(TranslationAdmin, ImageAdminMixin):
     list_display = ("title", "image_tag")
 
     def has_add_permission(self, request, obj=None):
@@ -115,7 +115,7 @@ class HeroSliderAdmin(TabbedTranslationAdmin, ImageAdminMixin):
 
 
 @admin.register(AboutUs)
-class AboutUsAdmin(TabbedTranslationAdmin):
+class AboutUsAdmin(TranslationAdmin):
     list_display = ("display_custom_text",)
     group_fieldsets = True
 
