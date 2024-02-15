@@ -10,7 +10,7 @@ from content_management.models import (
     ImageOrTextContent,
     HeroSlider,
     AboutUs,
-    PDFReport
+    PDFReport,
 )
 
 
