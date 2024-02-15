@@ -4,7 +4,11 @@ from django.utils.translation import gettext as _
 
 from content_management.upload_to_path import UploadToPath
 
-from validators.image_validation import validate_and_convert_image
+from validators.image_validation import (
+    validate_and_convert_image,
+    validate_image_size,
+    is_valid_image_extension,
+)
 from validators.pdf_validation import validate_pdf_file
 
 from content_management.help_texts import (
@@ -14,6 +18,8 @@ from content_management.help_texts import (
     TEXT_LENGTH_HELP_TEXT_200,
     TEXT_LENGTH_HELP_TEXT_500,
     IS_SHOWN_HELP_TEXT,
+    IMAGE_HELP_TEXT_NO_COMPRESSION,
+    ALT_TEXT_HELP_TEXT,
 )
 from ckeditor.fields import RichTextField
 
@@ -59,9 +65,13 @@ class Tender(models.Model):
 
 class Project(models.Model):
     image = models.FileField(
-        upload_to=UploadToPath("projects/"), verbose_name=_("Image"), help_text=IMAGE_HELP_TEXT
+        upload_to=UploadToPath("projects/"),
+        verbose_name=_("Image"),
+        help_text=IMAGE_HELP_TEXT,
     )
-    title = models.CharField(verbose_name=_("Title"))
+    title = models.CharField(
+        max_length=200, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_200
+    )
     description = RichTextField(
         max_length=500,
         verbose_name=_("Short Description"),
@@ -127,23 +137,24 @@ class ImageOrTextContent(models.Model):
         return _(f"Content for {self.project.title}")
 
     def clean(self):
+        if not self.image and not self.text:
+            raise ValidationError(_("Please provide either an image or text."))
         if self.image:
             try:
                 validate_and_convert_image(self.image)
             except ValidationError as e:
                 raise ValidationError({"image": e})
-            if not self.image and not self.text:
-                raise ValidationError(_("Please provide either an image or text."))
         super().clean()
 
     def save(self, *args, **kwargs):
-        self.full_clean()
         super().save(*args, **kwargs)
 
 
 class TeamMember(models.Model):
     image = models.FileField(
-        upload_to=UploadToPath("team-members/"), verbose_name=_("Image"), help_text=IMAGE_HELP_TEXT
+        upload_to=UploadToPath("team-members/"),
+        verbose_name=_("Image"),
+        help_text=IMAGE_HELP_TEXT,
     )
     full_name = models.CharField(
         max_length=200, verbose_name=_("Full Name"), help_text=TEXT_LENGTH_HELP_TEXT_200
@@ -169,13 +180,14 @@ class TeamMember(models.Model):
         super().clean()
 
     def save(self, *args, **kwargs):
-        self.full_clean()
         super().save(*args, **kwargs)
 
 
 class PartnerLogo(models.Model):
     image = models.FileField(
-        upload_to=UploadToPath("partner-logos/"), verbose_name=_("Image"), help_text=IMAGE_HELP_TEXT
+        upload_to=UploadToPath("partner-logos/"),
+        verbose_name=_("Image"),
+        help_text=IMAGE_HELP_TEXT,
     )
     company_name = models.CharField(
         max_length=100,
@@ -192,7 +204,7 @@ class PartnerLogo(models.Model):
         verbose_name_plural = _("Partner logos")
 
     def __str__(self):
-        return _(f"{self.company_name} logo")
+        return f"{self.company_name} logo"
 
     def clean(self):
         try:
@@ -208,7 +220,9 @@ class PartnerLogo(models.Model):
 
 class DonorLogo(models.Model):
     image = models.FileField(
-        upload_to=UploadToPath("donors-logos/"), verbose_name=_("Image"), help_text=IMAGE_HELP_TEXT
+        upload_to=UploadToPath("donors-logos/"),
+        verbose_name=_("Image"),
+        help_text=IMAGE_HELP_TEXT,
     )
     name = models.CharField(
         max_length=100,
@@ -225,7 +239,7 @@ class DonorLogo(models.Model):
         verbose_name_plural = _("Donor logos")
 
     def __str__(self):
-        return _(f"{self.name} logo")
+        return f"{self.name} logo"
 
     def clean(self):
         try:
@@ -241,7 +255,9 @@ class DonorLogo(models.Model):
 
 class News(models.Model):
     image = models.FileField(
-        upload_to=UploadToPath("news/"), verbose_name=_("Image"), help_text=IMAGE_HELP_TEXT
+        upload_to=UploadToPath("news/"),
+        verbose_name=_("Image"),
+        help_text=IMAGE_HELP_TEXT,
     )
     date = models.DateField(verbose_name=_("Date"))
     title = models.CharField(verbose_name=_("Title"))
@@ -284,8 +300,10 @@ class Contacts(Singleton):
         return _("Contacts")
 
 
-class PDFReport(Singleton):
-    title = models.CharField(max_length=255, verbose_name=_("Title"))
+class PDFReport(models.Model):
+    title = models.CharField(
+        max_length=200, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_200
+    )
     file_url = models.FileField(
         upload_to=UploadToPath("pdf-report/"),
         verbose_name=_("File URL"),
@@ -294,8 +312,8 @@ class PDFReport(Singleton):
     added_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Added At"))
 
     class Meta:
-        verbose_name = _("PDF report")
-        verbose_name_plural = _("PDF reports")
+        verbose_name = _("Document")
+        verbose_name_plural = _("Documents")
 
     def __str__(self):
         return f"{self.title}"
@@ -305,6 +323,43 @@ class PDFReport(Singleton):
             validate_pdf_file(self.file_url)
         except ValidationError as e:
             raise ValidationError({"file_url": e})
+        super().clean()
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
+
+
+class HeroSlider(models.Model):
+    title = models.CharField(
+        max_length=200, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_200
+    )
+    image = models.FileField(
+        upload_to=UploadToPath("hero-slider/"),
+        verbose_name=_("Image"),
+        help_text=IMAGE_HELP_TEXT_NO_COMPRESSION,
+    )
+    alt_text = models.CharField(
+        max_length=100,
+        null=True,
+        blank=True,
+        verbose_name=_("Alt Text"),
+        help_text=ALT_TEXT_HELP_TEXT,
+    )
+
+    class Meta:
+        verbose_name = _("Hero Slider")
+        verbose_name_plural = _("Hero Sliders")
+
+    def __str__(self):
+        return f"{self.title}"
+
+    def clean(self):
+        try:
+            is_valid_image_extension(self.image.name)
+            validate_image_size(self.image)
+        except ValidationError as e:
+            raise ValidationError({"image": e})
         super().clean()
 
     def save(self, *args, **kwargs):

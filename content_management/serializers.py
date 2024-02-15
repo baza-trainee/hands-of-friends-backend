@@ -10,6 +10,7 @@ from content_management.models import (
     Contacts,
     PDFReport,
     ImageOrTextContent,
+    HeroSlider,
 )
 
 
@@ -123,4 +124,15 @@ class PDFReportSerializer(serializers.ModelSerializer):
             "title",
             "file_url",
             "added_at",
+        )
+
+
+class HeroSliderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HeroSlider
+        fields = (
+            "id",
+            "title",
+            "image",
+            "alt_text",
         )

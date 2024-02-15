@@ -14,6 +14,7 @@ from content_management.models import (
     Contacts,
     PDFReport,
     DonorLogo,
+    HeroSlider,
 )
 from content_management.serializers import (
     TenderSerializer,
@@ -24,6 +25,7 @@ from content_management.serializers import (
     ContactsSerializer,
     PDFReportSerializer,
     DonorLogoSerializer,
+    HeroSliderSerializer,
 )
 
 
@@ -242,3 +244,20 @@ class ContactsViewSet(mixins.ListModelMixin, GenericViewSet):
 class PDFReportView(mixins.ListModelMixin, GenericViewSet):
     queryset = PDFReport.objects.all()
     serializer_class = PDFReportSerializer
+
+
+@extend_schema(
+    parameters=[
+        OpenApiParameter(
+            name="Accept-Language",
+            type=OpenApiTypes.STR,
+            location=OpenApiParameter.HEADER,
+            required=False,
+            description="Language code to get the content in a specific language (e.g., en, uk)",
+            enum=["en", "uk"],
+        ),
+    ]
+)
+class HeroSliderViewSet(mixins.ListModelMixin, GenericViewSet):
+    queryset = HeroSlider.objects.all()
+    serializer_class = HeroSliderSerializer

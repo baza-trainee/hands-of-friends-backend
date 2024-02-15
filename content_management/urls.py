@@ -9,6 +9,7 @@ from content_management.views import (
     NewsViewSet,
     ContactsViewSet,
     PDFReportView,
+    HeroSliderViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -20,6 +21,7 @@ router.register("donors", DonorLogoViewSet)
 router.register("news", NewsViewSet)
 router.register("contacts", ContactsViewSet)
 router.register("pdf-report", PDFReportView)
+router.register("hero-slider", HeroSliderViewSet)
 
 urlpatterns = router.urls
 

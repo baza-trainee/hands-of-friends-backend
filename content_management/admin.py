@@ -13,6 +13,7 @@ from content_management.models import (
     Contacts,
     PDFReport,
     DonorLogo,
+    HeroSlider,
 )
 
 
@@ -76,6 +77,13 @@ class NewsAdmin(TabbedTranslationAdmin, ImageAdminMixin):
     group_fieldsets = True
 
 
+@admin.register(PDFReport)
+class PDFReportAdmin(admin.ModelAdmin):
+    """PDFReport Admin"""
+
+    list_display = ("title", "file_url", "added_at")
+
+
 @admin.register(Contacts)
 class ContactsAdmin(TabbedTranslationAdmin):
     """Contacts Admin with singleton pattern"""
@@ -91,16 +99,15 @@ class ContactsAdmin(TabbedTranslationAdmin):
         return False
 
 
-@admin.register(PDFReport)
-class PDFReportAdmin(admin.ModelAdmin):
-    """PDFReport Admin with singleton pattern"""
-
-    list_display = ("title", "file_url", "added_at")
+@admin.register(HeroSlider)
+class HeroSliderAdmin(TabbedTranslationAdmin, ImageAdminMixin):
+    list_display = ("title", "image_tag")
 
     def has_add_permission(self, request, obj=None):
-        if PDFReport.objects.exists():
+        if HeroSlider.objects.count() >= 5:
             return False
         return True
 
     def has_delete_permission(self, request, obj=None):
-        return False
+        if HeroSlider.objects.count() <= 1:
+            return False
