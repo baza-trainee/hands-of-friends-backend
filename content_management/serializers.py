@@ -100,7 +100,6 @@ class NewsSerializer(serializers.ModelSerializer):
             "date",
             "title",
             "description",
-            "link_to_news",
         )
 
 
