@@ -79,7 +79,7 @@ class NewsAdmin(TranslationAdmin, ImageAdminMixin):
 
 
 @admin.register(PDFReport)
-class PDFReportAdmin(admin.ModelAdmin):
+class PDFReportAdmin(TranslationAdmin):
     """PDFReport Admin"""
 
     list_display = ("title", "file_url", "added_at")
