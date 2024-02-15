@@ -17,10 +17,11 @@ from content_management.help_texts import (
     TEXT_LENGTH_HELP_TEXT_100,
     TEXT_LENGTH_HELP_TEXT_200,
     TEXT_LENGTH_HELP_TEXT_500,
+    TEXT_LENGTH_HELP_TEXT_1000,
+    TEXT_LENGTH_HELP_TEXT_2500,
     IS_SHOWN_HELP_TEXT,
     IMAGE_HELP_TEXT_NO_COMPRESSION,
     ALT_TEXT_HELP_TEXT,
-    TEXT_LENGTH_HELP_TEXT_2500,
 )
 from ckeditor.fields import RichTextField
 
@@ -261,9 +262,14 @@ class News(models.Model):
         help_text=IMAGE_HELP_TEXT,
     )
     date = models.DateField(verbose_name=_("Date"))
-    title = models.CharField(verbose_name=_("Title"))
-    description = models.TextField(verbose_name=_("Description"))
-    link_to_news = models.URLField(verbose_name=_("Link to News"))
+    title = models.CharField(
+        max_length=100, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_100
+    )
+    description = models.TextField(
+        max_length=1000,
+        verbose_name=_("Description"),
+        help_text=TEXT_LENGTH_HELP_TEXT_1000,
+    )
     added_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Added At"))
 
     class Meta:
