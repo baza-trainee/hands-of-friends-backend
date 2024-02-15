@@ -59,9 +59,13 @@ class Tender(models.Model):
 
 class Project(models.Model):
     image = models.FileField(
-        upload_to=UploadToPath("projects/"), verbose_name=_("Image"), help_text=IMAGE_HELP_TEXT
+        upload_to=UploadToPath("projects/"),
+        verbose_name=_("Image"),
+        help_text=IMAGE_HELP_TEXT,
     )
-    title = models.CharField(verbose_name=_("Title"))
+    title = models.CharField(
+        max_length=200, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_200
+    )
     description = RichTextField(
         max_length=500,
         verbose_name=_("Short Description"),
@@ -127,23 +131,24 @@ class ImageOrTextContent(models.Model):
         return _(f"Content for {self.project.title}")
 
     def clean(self):
+        if not self.image and not self.text:
+            raise ValidationError(_("Please provide either an image or text."))
         if self.image:
             try:
                 validate_and_convert_image(self.image)
             except ValidationError as e:
                 raise ValidationError({"image": e})
-            if not self.image and not self.text:
-                raise ValidationError(_("Please provide either an image or text."))
         super().clean()
 
     def save(self, *args, **kwargs):
-        self.full_clean()
         super().save(*args, **kwargs)
 
 
 class TeamMember(models.Model):
     image = models.FileField(
-        upload_to=UploadToPath("team-members/"), verbose_name=_("Image"), help_text=IMAGE_HELP_TEXT
+        upload_to=UploadToPath("team-members/"),
+        verbose_name=_("Image"),
+        help_text=IMAGE_HELP_TEXT,
     )
     full_name = models.CharField(
         max_length=200, verbose_name=_("Full Name"), help_text=TEXT_LENGTH_HELP_TEXT_200
@@ -169,13 +174,14 @@ class TeamMember(models.Model):
         super().clean()
 
     def save(self, *args, **kwargs):
-        self.full_clean()
         super().save(*args, **kwargs)
 
 
 class PartnerLogo(models.Model):
     image = models.FileField(
-        upload_to=UploadToPath("partner-logos/"), verbose_name=_("Image"), help_text=IMAGE_HELP_TEXT
+        upload_to=UploadToPath("partner-logos/"),
+        verbose_name=_("Image"),
+        help_text=IMAGE_HELP_TEXT,
     )
     company_name = models.CharField(
         max_length=100,
@@ -208,7 +214,9 @@ class PartnerLogo(models.Model):
 
 class DonorLogo(models.Model):
     image = models.FileField(
-        upload_to=UploadToPath("donors-logos/"), verbose_name=_("Image"), help_text=IMAGE_HELP_TEXT
+        upload_to=UploadToPath("donors-logos/"),
+        verbose_name=_("Image"),
+        help_text=IMAGE_HELP_TEXT,
     )
     name = models.CharField(
         max_length=100,
@@ -241,7 +249,9 @@ class DonorLogo(models.Model):
 
 class News(models.Model):
     image = models.FileField(
-        upload_to=UploadToPath("news/"), verbose_name=_("Image"), help_text=IMAGE_HELP_TEXT
+        upload_to=UploadToPath("news/"),
+        verbose_name=_("Image"),
+        help_text=IMAGE_HELP_TEXT,
     )
     date = models.DateField(verbose_name=_("Date"))
     title = models.CharField(verbose_name=_("Title"))
