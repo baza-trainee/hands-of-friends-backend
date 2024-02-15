@@ -8,6 +8,7 @@ from content_management.models import (
     PartnerLogo,
     DonorLogo,
     ImageOrTextContent,
+    HeroSlider,
 )
 
 
@@ -49,3 +50,8 @@ class NewsTranslationOptions(TranslationOptions):
 @register(Contacts)
 class ContactsTranslationOptions(TranslationOptions):
     fields = ("address",)
+
+
+@register(HeroSlider)
+class HeroSliderTranslationOptions(TranslationOptions):
+    fields = ("title", "alt_text")

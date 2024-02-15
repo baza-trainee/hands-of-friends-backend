@@ -13,6 +13,7 @@ from content_management.models import (
     Contacts,
     PDFReport,
     DonorLogo,
+    HeroSlider,
 )
 
 
@@ -96,3 +97,17 @@ class ContactsAdmin(TabbedTranslationAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
+
+@admin.register(HeroSlider)
+class HeroSliderAdmin(TabbedTranslationAdmin, ImageAdminMixin):
+    list_display = ("title", "image_tag")
+
+    def has_add_permission(self, request, obj=None):
+        if HeroSlider.objects.count() >= 5:
+            return False
+        return True
+
+    def has_delete_permission(self, request, obj=None):
+        if HeroSlider.objects.count() <= 1:
+            return False
