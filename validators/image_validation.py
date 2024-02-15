@@ -11,9 +11,12 @@ from validators.constants import VALID_IMAGE_EXTENSIONS, MAX_FILE_SIZE
 from validators.file_utils import FileUtility
 
 
-def is_valid_image_extension(file_name: str) -> bool:
+def is_valid_image_extension(file_name: str) -> None:
     """Check if the file has a valid image extension."""
-    return file_name.lower().endswith(tuple(VALID_IMAGE_EXTENSIONS))
+    if not file_name.lower().endswith(tuple(VALID_IMAGE_EXTENSIONS)):
+        raise ValidationError(
+            "Непідтримуваний розширення файлу. Дозволені розширення: jpg, jpeg, webp, png, svg."
+        )
 
 
 def convert_image_to_webp(image: Image, quality: int = 90) -> Tuple[io.BytesIO, str]:
@@ -47,10 +50,7 @@ def validate_and_convert_image(image_field: FieldFile) -> None:
     """Validate and convert the image to WEBP format if necessary."""
     file_name = image_field.name
 
-    if not is_valid_image_extension(file_name):
-        raise ValidationError(
-            "Непідтримуваний розширення файлу. Дозволені розширення: jpg, jpeg, webp, png, svg."
-        )
+    is_valid_image_extension(file_name)
 
     file_extension = FileUtility.get_file_extension(file_name)
 
