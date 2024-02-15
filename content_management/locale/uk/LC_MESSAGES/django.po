@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-15 15:28+0000\n"
+"POT-Creation-Date: 2024-02-15 17:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,7 +85,7 @@ msgstr "Дозволений лише один екземпляр {self.__class_
 
 #: content_management/models.py:43 content_management/models.py:75
 #: content_management/models.py:266 content_management/models.py:312
-#: content_management/models.py:342
+#: content_management/models.py:343
 msgid "Title"
 msgstr "Назва"
 
@@ -134,7 +134,7 @@ msgstr "Дата початку не може бути після дати за�
 #: content_management/models.py:71 content_management/models.py:120
 #: content_management/models.py:158 content_management/models.py:191
 #: content_management/models.py:226 content_management/models.py:261
-#: content_management/models.py:346
+#: content_management/models.py:347
 msgid "Image"
 msgstr "Зображення"
 
@@ -261,39 +261,39 @@ msgstr "Контакти"
 msgid "File URL"
 msgstr "URL файлу"
 
-#: content_management/models.py:322
+#: content_management/models.py:323
 msgid "Document"
 msgstr "Документ"
 
-#: content_management/models.py:323
+#: content_management/models.py:324
 msgid "Documents"
 msgstr "Документи"
 
-#: content_management/models.py:353
+#: content_management/models.py:354
 msgid "Alt Text"
 msgstr "Альтернативний Текст Зображення"
 
-#: content_management/models.py:358
+#: content_management/models.py:359
 msgid "Hero Slider"
 msgstr "Hero Cлайдер"
 
-#: content_management/models.py:359
+#: content_management/models.py:360
 msgid "Hero Sliders"
 msgstr "Hero Cлайдери"
 
-#: content_management/models.py:379
+#: content_management/models.py:380
 msgid "History"
 msgstr "Історія"
 
-#: content_management/models.py:383
+#: content_management/models.py:384
 msgid "Principles"
 msgstr "Приципи"
 
-#: content_management/models.py:387
+#: content_management/models.py:388
 msgid "Values"
 msgstr "Цінності"
 
-#: content_management/models.py:391 content_management/models.py:392
-#: content_management/models.py:395
+#: content_management/models.py:392 content_management/models.py:393
+#: content_management/models.py:396
 msgid "About Us"
 msgstr "Про нас"

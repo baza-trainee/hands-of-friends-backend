@@ -319,6 +319,7 @@ class PDFReport(models.Model):
     added_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Added At"))
 
     class Meta:
+        ordering = ["title"]
         verbose_name = _("Document")
         verbose_name_plural = _("Documents")
 
