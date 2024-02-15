@@ -23,6 +23,7 @@ router.register("contacts", ContactsViewSet)
 router.register("pdf-report", PDFReportView)
 router.register("hero-slider", HeroSliderViewSet)
 
+
 urlpatterns = router.urls
 
 app_name = "content_management"

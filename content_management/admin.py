@@ -14,6 +14,7 @@ from content_management.models import (
     PDFReport,
     DonorLogo,
     HeroSlider,
+    AboutUs,
 )
 
 
@@ -111,3 +112,9 @@ class HeroSliderAdmin(TabbedTranslationAdmin, ImageAdminMixin):
     def has_delete_permission(self, request, obj=None):
         if HeroSlider.objects.count() <= 1:
             return False
+
+
+@admin.register(AboutUs)
+class AboutUsAdmin(TabbedTranslationAdmin):
+    list_display = ("history", "principles", "values")
+    group_fieldsets = True

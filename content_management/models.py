@@ -20,6 +20,7 @@ from content_management.help_texts import (
     IS_SHOWN_HELP_TEXT,
     IMAGE_HELP_TEXT_NO_COMPRESSION,
     ALT_TEXT_HELP_TEXT,
+    TEXT_LENGTH_HELP_TEXT_2500,
 )
 from ckeditor.fields import RichTextField
 
@@ -365,3 +366,24 @@ class HeroSlider(models.Model):
     def save(self, *args, **kwargs):
         self.full_clean()
         super().save(*args, **kwargs)
+
+
+class AboutUs(Singleton):
+    history = RichTextField(
+        max_length=2500, verbose_name=_("History"), help_text=TEXT_LENGTH_HELP_TEXT_2500
+    )
+    principles = RichTextField(
+        max_length=2500,
+        verbose_name=_("Principles"),
+        help_text=TEXT_LENGTH_HELP_TEXT_2500,
+    )
+    values = RichTextField(
+        max_length=2500, verbose_name=_("Values"), help_text=TEXT_LENGTH_HELP_TEXT_2500
+    )
+
+    class Meta:
+        verbose_name = _("About Us")
+        verbose_name_plural = _("About Us")
+
+    def __str__(self):
+        return _("About Us")
