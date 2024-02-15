@@ -56,7 +56,7 @@ def validate_and_convert_image(image_field: FieldFile) -> None:
 
     file_extension = FileUtility.get_file_extension(file_name)
 
-    if file_extension == "svg":
+    if file_extension in ["svg", "webp"]:
         return
 
     try:
