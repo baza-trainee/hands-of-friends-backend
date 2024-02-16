@@ -1,5 +1,5 @@
 from django.db import models
-from validators.feedback_form_validation import (
+from validators.form_validation import (
     validate_email_domain,
     validate_name,
     validate_phone_number,

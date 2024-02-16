@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-15 14:08+0000\n"
+"POT-Creation-Date: 2024-02-16 14:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,14 +21,14 @@ msgstr ""
 "100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
 "(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
-#: validators/feedback_form_validation.py:16
+#: validators/form_validation.py:16
 msgid "Name must contain only letters, spaces, or hyphens."
 msgstr "Імʼя повинно містити тільки літери, пробіли або дефіси."
 
-#: validators/feedback_form_validation.py:19
+#: validators/form_validation.py:19
 msgid "Name must be at least 2 characters long."
 msgstr "Імʼя повинно містити принаймні 2 символи."
 
-#: validators/feedback_form_validation.py:22
+#: validators/form_validation.py:22
 msgid "Name must be at most 50 characters long."
 msgstr "Імʼя повинно містити не більше 50 символів."
