@@ -116,7 +116,7 @@ class TenderViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVie
     ]
 )
 class ProjectViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericViewSet):
-    queryset = Project.objects.all()
+    queryset = Project.objects.select_related("content")
     serializer_class = ProjectSerializer
 
     def get_queryset(self):
