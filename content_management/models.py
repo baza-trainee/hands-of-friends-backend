@@ -265,7 +265,7 @@ class News(models.Model):
     title = models.CharField(
         max_length=100, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_100
     )
-    description = models.TextField(
+    description = RichTextField(
         max_length=1000,
         verbose_name=_("Description"),
         help_text=TEXT_LENGTH_HELP_TEXT_1000,
