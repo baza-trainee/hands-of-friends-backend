@@ -16,8 +16,8 @@ from content_management.models import (
 
 
 class TenderSerializer(serializers.ModelSerializer):
-    start_date = serializers.DateField(format="%d-%m-%Y")
-    end_date = serializers.DateField(format="%d-%m-%Y")
+    start_date = serializers.DateField(format="%d.%m.%Y")
+    end_date = serializers.DateField(format="%d.%m.%Y")
 
     class Meta:
         model = Tender
@@ -43,6 +43,8 @@ class ImageOrTextSerializer(serializers.ModelSerializer):
 
 
 class ProjectSerializer(serializers.ModelSerializer):
+    start_date = serializers.DateField(format="%d.%m.%Y")
+    end_date = serializers.DateField(format="%d.%m.%Y")
     content = ImageOrTextSerializer(many=True)
 
     class Meta:
