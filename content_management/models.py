@@ -191,7 +191,7 @@ class PartnerLogo(models.Model):
         verbose_name=_("Image"),
         help_text=IMAGE_HELP_TEXT,
     )
-    company_name = models.CharField(
+    name = models.CharField(
         max_length=100,
         null=True,
         blank=True,
@@ -201,12 +201,12 @@ class PartnerLogo(models.Model):
     added_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Added At"))
 
     class Meta:
-        ordering = ["company_name"]
+        ordering = ["name"]
         verbose_name = _("Partner logo")
         verbose_name_plural = _("Partner logos")
 
     def __str__(self):
-        return f"{self.company_name} logo"
+        return f"{self.name} logo"
 
     def clean(self):
         try:
