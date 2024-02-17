@@ -36,7 +36,7 @@ class TeamMemberTranslationOptions(TranslationOptions):
 
 @register(PartnerLogo)
 class PartnerLogoTranslationOptions(TranslationOptions):
-    fields = ("company_name",)
+    fields = ("name",)
 
 
 @register(DonorLogo)

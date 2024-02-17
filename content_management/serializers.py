@@ -79,7 +79,7 @@ class PartnerLogoSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "image",
-            "company_name",
+            "name",
         )
 
 

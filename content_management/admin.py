@@ -60,8 +60,8 @@ class TeamMemberAdmin(TranslationAdmin, ImageAdminMixin):
 
 @admin.register(PartnerLogo)
 class PartnerLogoAdmin(TranslationAdmin, ImageAdminMixin):
-    list_display = ("company_name", "image_tag")
-    search_fields = ("company_name",)
+    list_display = ("name", "image_tag")
+    search_fields = ("name",)
 
 
 @admin.register(DonorLogo)
