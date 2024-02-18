@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     "content_management",
     "feedback",
     "collaboration",
+    "email_config",
     "django_cleanup.apps.CleanupConfig",  # Must be the last one in the list
 ]
 
@@ -197,13 +198,7 @@ SPECTACULAR_SETTINGS = {
 # CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
 CORS_ALLOW_ALL_ORIGINS = True
 
-# Email settings
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = os.environ["EMAIL_HOST"]
-EMAIL_PORT = os.environ["EMAIL_PORT"]
-EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", "") == "True"
-EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
-EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
+EMAIL_BACKEND = "email_config.backends.CustomEmailBackend"
 
 # SSL
 os.environ["SSL_CERT_FILE"] = certifi.where()

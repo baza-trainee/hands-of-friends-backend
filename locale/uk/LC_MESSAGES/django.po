@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-18 11:28+0000\n"
+"POT-Creation-Date: 2024-02-18 17:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,7 @@ msgid "Representative Name"
 msgstr "Імʼя представника"
 
 #: collaboration/models.py:15 collaboration/models.py:36
-#: collaboration/models.py:55
+#: collaboration/models.py:55 email_config/models.py:16
 msgid "Email"
 msgstr "Email"
 
@@ -95,11 +95,44 @@ msgstr "Запити волонтерів"
 msgid "Feedback from {self.name} at {self.sent_at}"
 msgstr "Зворотний звʼязок від {self.name} о {self.sent_at}"
 
-#: hands_of_friends/settings.py:138
+#: email_config/apps.py:8
+msgid "Email Configuration"
+msgstr "Конфігурація Email"
+
+#: email_config/models.py:9
+msgid "Backend"
+msgstr "Сервер"
+
+#: email_config/models.py:12
+msgid "Host"
+msgstr "Хост"
+
+#: email_config/models.py:14
+msgid "Port"
+msgstr "Порт"
+
+#: email_config/models.py:15
+msgid "Use TLS"
+msgstr "Використовувати TLS"
+
+#: email_config/models.py:17
+#| msgid "Change password"
+msgid "Password"
+msgstr "Змінити пароль"
+
+#: email_config/models.py:18
+msgid "Use SSL"
+msgstr "Використовувати SSL"
+
+#: email_config/models.py:21
+msgid "Email Settings"
+msgstr "Email налаштування"
+
+#: hands_of_friends/settings.py:144
 msgid "Ukrainian"
 msgstr "Українська"
 
-#: hands_of_friends/settings.py:139
+#: hands_of_friends/settings.py:145
 msgid "English"
 msgstr "Англійська"
 
@@ -117,7 +150,7 @@ msgstr "Змінити пароль"
 
 #: templates/admin/base.html:175
 msgid "Log out"
-msgstr ""
+msgstr "Вийти"
 
 #: templates/admin/base.html:188
 msgid "See Profile"
@@ -149,7 +182,7 @@ msgstr ""
 
 #: templates/admin/base.html:375
 msgid "Close"
-msgstr ""
+msgstr "Закрити"
 
 #: templates/admin/login.html:15
 #, python-format
@@ -158,18 +191,41 @@ msgid ""
 "page. Would you like to login to a different account?"
 msgstr ""
 
-#: templates/admin/login.html:63
-msgid "Forgotten your password?"
-msgstr ""
-
-#: templates/admin/login.html:71
+#: templates/admin/login.html:61
 msgid "Log in"
 msgstr ""
 
-#: templates/registration/logged_out.html:8
-msgid "Thanks for spending some quality time with the Web site today."
+#: templates/admin/login.html:69
+msgid "Забули пароль?"
 msgstr ""
 
-#: templates/registration/logged_out.html:11
+#: templates/registration/logged_out.html:7
+msgid "Ви успішно вийшли з системи. Бажаємо вам чудового дня!"
+msgstr ""
+
+#: templates/registration/logged_out.html:10
 msgid "Log in again"
 msgstr ""
+
+#: templates/registration/password_reset_done.html:7
+msgid ""
+"We’ve emailed you instructions for setting your password, if an account "
+"exists with the email you entered. You should receive them shortly."
+msgstr ""
+
+#: templates/registration/password_reset_done.html:14
+msgid ""
+"If you don’t receive an email, please make sure you’ve entered the address "
+"you registered with, and check your spam folder."
+msgstr ""
+
+#: templates/registration/password_reset_form.html:8
+msgid ""
+"Forgotten your password? Enter your email address below, and we’ll email "
+"instructions for setting a new one."
+msgstr ""
+
+#: templates/registration/password_reset_form.html:41
+#| msgid "Change password"
+msgid "Reset my password"
+msgstr "Змінити пароль"
