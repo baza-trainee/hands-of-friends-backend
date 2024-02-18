@@ -1,0 +1,299 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-18 18:13+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != "
+"11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % "
+"100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
+"(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+
+#: content_management/admin.py:27
+msgid "Image Preview"
+msgstr "Попередній перегляд зображення"
+
+#: content_management/apps.py:8
+msgid "Content Management"
+msgstr "Управління контентом"
+
+#: content_management/help_texts.py:8
+msgid ""
+"Зображення має бути у форматі .jpg, .jpeg, .webp, .png або .svg. Після "
+"завантаження зображення "
+msgstr ""
+
+#: content_management/help_texts.py:13
+msgid ""
+"Зображення має бути у форматі .jpg, .jpeg, .webp, .png або .svg та не "
+"перевищувати {int(MAX_FILE_SIZE / 1024 / 1024)} МБ."
+msgstr ""
+
+#: content_management/help_texts.py:17
+msgid ""
+"Альтернативний текст для зображення, що описує зображення для SEO. "
+"Максимальна довжина тексту: 100 символів."
+msgstr ""
+
+#: content_management/help_texts.py:21
+msgid ""
+"Файл має бути у форматі .pdf та не перевищувати {int(MAX_FILE_SIZE / 1024 / "
+"1024)} МБ."
+msgstr ""
+
+#: content_management/help_texts.py:24
+msgid "Максимальна довжина тексту: 100 символів."
+msgstr ""
+
+#: content_management/help_texts.py:25
+msgid "Максимальна довжина тексту: 200 символів."
+msgstr ""
+
+#: content_management/help_texts.py:26
+msgid "Максимальна довжина тексту: 500 символів."
+msgstr ""
+
+#: content_management/help_texts.py:27
+msgid "Максимальна довжина тексту: 1000 символів."
+msgstr ""
+
+#: content_management/help_texts.py:28
+msgid "Максимальна довжина тексту: 2500 символів."
+msgstr ""
+
+#: content_management/help_texts.py:29
+msgid "Позначте, якщо ви хочете, щоб цей об'єкт був видимим на сайті."
+msgstr ""
+
+# python-brace-format
+#: content_management/models.py:36
+#, python-brace-format
+msgid "Only one {self.__class__.__name__} instance is allowed."
+msgstr "Дозволений лише один екземпляр {self.__class__.__name__}."
+
+#: content_management/models.py:43 content_management/models.py:75
+#: content_management/models.py:266 content_management/models.py:312
+#: content_management/models.py:343
+msgid "Title"
+msgstr "Назва"
+
+#: content_management/models.py:45 content_management/models.py:270
+msgid "Description"
+msgstr "Опис"
+
+#: content_management/models.py:46 content_management/models.py:82
+msgid "Start Date"
+msgstr "Дата початку"
+
+#: content_management/models.py:47 content_management/models.py:83
+msgid "End Date"
+msgstr "Дата завершення"
+
+#: content_management/models.py:48 content_management/models.py:84
+msgid "Is Active"
+msgstr "Активний"
+
+#: content_management/models.py:50 content_management/models.py:86
+msgid "Is Shown"
+msgstr "Показувати на сайті"
+
+#: content_management/models.py:52 content_management/models.py:88
+#: content_management/models.py:131
+msgid "Created At"
+msgstr "Створено"
+
+#: content_management/models.py:53 content_management/models.py:89
+#: content_management/models.py:132
+msgid "Updated At"
+msgstr "Оновлено"
+
+#: content_management/models.py:57
+msgid "Tender"
+msgstr "Тендер"
+
+#: content_management/models.py:58
+msgid "Tenders"
+msgstr "Тендери"
+
+#: content_management/models.py:65
+msgid "Start date cannot be after end date."
+msgstr "Дата початку не може бути після дати завершення."
+
+#: content_management/models.py:71 content_management/models.py:120
+#: content_management/models.py:158 content_management/models.py:191
+#: content_management/models.py:226 content_management/models.py:261
+#: content_management/models.py:347
+msgid "Image"
+msgstr "Зображення"
+
+#: content_management/models.py:79
+msgid "Short Description"
+msgstr "Короткий Опис"
+
+#: content_management/models.py:93 content_management/models.py:116
+msgid "Project"
+msgstr "Проєкт"
+
+#: content_management/models.py:94
+msgid "Projects"
+msgstr "Проєкти"
+
+#: content_management/models.py:128
+msgid "Text"
+msgstr "Текст"
+
+#: content_management/models.py:129
+msgid "Enter text for the content."
+msgstr "Введіть контент."
+
+#: content_management/models.py:135
+msgid "Project Content"
+msgstr "Контент"
+
+#: content_management/models.py:136
+msgid "Project Contents"
+msgstr "Контент"
+
+#: content_management/models.py:139
+#, python-brace-format
+msgid "Content for {self.project.title}"
+msgstr "Контент для {self.project.title}"
+
+#: content_management/models.py:143
+msgid "Please provide either an image or text."
+msgstr "Будь ласка, вкажіть або зображення, або текст."
+
+#: content_management/models.py:162
+msgid "Full Name"
+msgstr "Повне ім'я"
+
+#: content_management/models.py:165
+msgid "Position"
+msgstr "Посада"
+
+#: content_management/models.py:167 content_management/models.py:201
+#: content_management/models.py:236 content_management/models.py:273
+#: content_management/models.py:319
+msgid "Added At"
+msgstr "Додано"
+
+#: content_management/models.py:171
+msgid "Team member"
+msgstr "Член команди"
+
+#: content_management/models.py:172
+msgid "Team members"
+msgstr "Команда"
+
+#: content_management/models.py:198
+msgid "Company Name"
+msgstr "Назва компанії"
+
+#: content_management/models.py:205
+msgid "Partner logo"
+msgstr "Логотип партнера"
+
+#: content_management/models.py:206
+msgid "Partner logos"
+msgstr "Логотипи партнерів"
+
+#: content_management/models.py:233
+msgid "Donor Name"
+msgstr "Імʼя донора"
+
+#: content_management/models.py:240
+msgid "Donor logo"
+msgstr "Логотип донора"
+
+#: content_management/models.py:241
+msgid "Donor logos"
+msgstr "Логотипи донорів"
+
+#: content_management/models.py:264
+msgid "Date"
+msgstr "Дата"
+
+#: content_management/models.py:277 content_management/models.py:278
+msgid "News"
+msgstr "Новини"
+
+#: content_management/models.py:296
+msgid "Phone Number"
+msgstr "Номер телефону"
+
+#: content_management/models.py:297
+msgid "Email"
+msgstr "Електронна пошта"
+
+#: content_management/models.py:298
+msgid "Youtube Link"
+msgstr "Посилання на Youtube"
+
+#: content_management/models.py:299
+msgid "Facebook Link"
+msgstr "Посилання на Facebook"
+
+#: content_management/models.py:300
+msgid "Address"
+msgstr "Адреса"
+
+#: content_management/models.py:303
+msgid "Contact"
+msgstr "Контакт"
+
+#: content_management/models.py:304 content_management/models.py:307
+msgid "Contacts"
+msgstr "Контакти"
+
+#: content_management/models.py:316
+msgid "File URL"
+msgstr "URL файлу"
+
+#: content_management/models.py:323
+msgid "Document"
+msgstr "Документ"
+
+#: content_management/models.py:324
+msgid "Documents"
+msgstr "Документи"
+
+#: content_management/models.py:354
+msgid "Alt Text"
+msgstr "Альтернативний Текст Зображення"
+
+#: content_management/models.py:359
+msgid "Hero Slider"
+msgstr "Hero Cлайдер"
+
+#: content_management/models.py:360
+msgid "Hero Sliders"
+msgstr "Hero Cлайдери"
+
+#: content_management/models.py:380
+msgid "History"
+msgstr "Історія"
+
+#: content_management/models.py:384
+msgid "Principles"
+msgstr "Приципи"
+
+#: content_management/models.py:388
+msgid "Values"
+msgstr "Цінності"
+
+#: content_management/models.py:392 content_management/models.py:393
+#: content_management/models.py:396
+msgid "About Us"
+msgstr "Про нас"
