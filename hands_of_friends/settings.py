@@ -61,8 +61,8 @@ INSTALLED_APPS = [
     "import_export",
     "user",
     "content_management",
-    "feedback",
-    "collaboration",
+    "feedback.apps.FeedbackConfig",
+    "collaboration.apps.CollaborationConfig",
     "email_config",
     "django_cleanup.apps.CleanupConfig",  # Must be the last one in the list
 ]
