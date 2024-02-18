@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+
+import certifi
 from django.utils.translation import gettext_lazy as _
 
 from dotenv import load_dotenv
@@ -131,6 +133,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = "user.User"
 
+LOGIN_URL = "admin:login"
+LOGIN_REDIRECT_URL = "/admin/"
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -191,6 +196,17 @@ SPECTACULAR_SETTINGS = {
 # TODO: Change to specific origins in production
 # CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
 CORS_ALLOW_ALL_ORIGINS = True
+
+# Email settings
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = os.environ["EMAIL_HOST"]
+EMAIL_PORT = os.environ["EMAIL_PORT"]
+EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", "") == "True"
+EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
+EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
+
+# SSL
+os.environ["SSL_CERT_FILE"] = certifi.where()
 
 # CKEditor
 CKEDITOR_CONFIGS = {
@@ -286,10 +302,10 @@ JAZZMIN_SETTINGS = {
 }
 
 JAZZMIN_UI_TWEAKS = {
-    "navbar_small_text": False,
-    "footer_small_text": False,
-    "body_small_text": False,
-    "brand_small_text": False,
+    "navbar_small_text": True,
+    "footer_small_text": True,
+    "body_small_text": True,
+    "brand_small_text": True,
     "brand_colour": "navbar-dark",
     "accent": "accent-lightblue",
     "navbar": "navbar-dark",
