@@ -28,5 +28,9 @@ class EmailSettings(models.Model):
 class Recipient(models.Model):
     email = models.EmailField(unique=True)
 
+    class Meta:
+        verbose_name = _("Recipient")
+        verbose_name_plural = _("Recipients")
+
     def __str__(self):
         return self.email
