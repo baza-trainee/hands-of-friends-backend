@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     "user",
     "content_management",
     "feedback",
+    "collaboration",
     "django_cleanup.apps.CleanupConfig",  # Must be the last one in the list
 ]
 
