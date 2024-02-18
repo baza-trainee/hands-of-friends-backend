@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-18 17:18+0000\n"
+"POT-Creation-Date: 2024-02-18 18:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -116,7 +116,6 @@ msgid "Use TLS"
 msgstr "Використовувати TLS"
 
 #: email_config/models.py:17
-#| msgid "Change password"
 msgid "Password"
 msgstr "Змінити пароль"
 
@@ -126,7 +125,15 @@ msgstr "Використовувати SSL"
 
 #: email_config/models.py:21
 msgid "Email Settings"
-msgstr "Email налаштування"
+msgstr "Email Налаштування"
+
+#: email_config/models.py:32
+msgid "Recipient"
+msgstr "Отримувач email повідомлень"
+
+#: email_config/models.py:33
+msgid "Recipients"
+msgstr "Отримувач email повідомлень"
 
 #: hands_of_friends/settings.py:144
 msgid "Ukrainian"
@@ -226,6 +233,5 @@ msgid ""
 msgstr ""
 
 #: templates/registration/password_reset_form.html:41
-#| msgid "Change password"
 msgid "Reset my password"
 msgstr "Змінити пароль"
