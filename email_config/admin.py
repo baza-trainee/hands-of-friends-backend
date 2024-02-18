@@ -10,7 +10,7 @@ class EmailSettingsAdmin(admin.ModelAdmin):
         "port",
         "host_user",
     )
-    list_editable = ("host", "port", "host_user", "host_password")
+    list_editable = ("host", "port", "host_user")
     readonly_fields = ("backend", "use_tls", "use_ssl")
 
     def has_add_permission(self, request) -> bool:
