@@ -21,7 +21,7 @@ class PartnerFormAdmin(ImportExportModelAdmin):
         return [f.name for f in self.model._meta.fields]
 
     def changeform_view(
-            self, request, object_id=None, form_url="", extra_context=None
+        self, request, object_id=None, form_url="", extra_context=None
     ) -> None:
         extra_context = extra_context or {}
         extra_context["show_save_and_continue"] = False
@@ -48,7 +48,7 @@ class DonorFormAdmin(ImportExportModelAdmin):
         return [f.name for f in self.model._meta.fields]
 
     def changeform_view(
-            self, request, object_id=None, form_url="", extra_context=None
+        self, request, object_id=None, form_url="", extra_context=None
     ) -> None:
         extra_context = extra_context or {}
         extra_context["show_save_and_continue"] = False

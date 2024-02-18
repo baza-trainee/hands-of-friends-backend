@@ -21,7 +21,6 @@ def send_partner_form_email(sender, instance, created, **kwargs):
             f"Телефон: {instance.phone}\n"
             f"Повідомлення: {instance.message}\n"
             f"Форму відправлено: {formatted_sent_at}"
-
         )
         recipient_emails = [recipient.email for recipient in Recipient.objects.all()]
         send_email(subject, message, recipient_emails)
