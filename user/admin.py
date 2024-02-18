@@ -9,27 +9,29 @@ admin.site.unregister(Group)
 
 @admin.register(User)
 class UserAdmin(DjangoUserAdmin):
-    """Define admin model for custom User model with no username field."""
-
     fieldsets = (
         (None, {"fields": ("email", "password")}),
         (_("Personal info"), {"fields": ("first_name", "last_name")}),
+        (
+            _("Permissions"),
+            {"fields": ("is_active", "is_staff", "is_superuser", "user_permissions")},
+        ),
     )
     add_fieldsets = (
         (
             None,
             {
                 "classes": ("wide",),
-                "fields": ("email", "password1", "password2"),
+                "fields": (
+                    "email",
+                    "password1",
+                    "password2",
+                    "is_staff",
+                    "is_superuser",
+                ),
             },
         ),
     )
-    list_display = ("email", "first_name", "last_name", "is_staff")
+    list_display = ("email", "first_name", "last_name", "is_staff", "is_superuser")
     search_fields = ("email", "first_name", "last_name")
     ordering = ("email",)
-
-    def has_delete_permission(self, request, obj=None):
-        return False
-
-    def has_add_permission(self, request):
-        return False

@@ -5,7 +5,7 @@
 {% get_jazzmin_ui_tweaks as jazzmin_ui %}
 
 {% block content %}
-  <p class="login-box-msg">{{ jazzmin_settings.welcome_sign }}</p>
+  <p class="login-box-msg p-2 pb-4">{{ jazzmin_settings.welcome_sign }}</p>
   <form action="{{ app_path }}" method="post">
     {% csrf_token %}
     {% if user.is_authenticated %}
@@ -55,21 +55,19 @@
         </div>
       </div>
     </div>
-    {% url 'admin_password_reset' as password_reset_url %}
-    {% if password_reset_url %}
-      <div class="mb-3">
-        <div class="password-reset-link" style="text-align: center;">
-          <a href="{{ password_reset_url }}">
-            {% trans 'Forgotten your password?' %}
-          </a>
-        </div>
-      </div>
-    {% endif %}
     <div class="row">
       <div class="col-12">
         <button type="submit" class="btn {{ jazzmin_ui.button_classes.primary }} btn-block">
           {% trans "Log in" %}
         </button>
+      </div>
+    </div>
+    {% url 'user:admin_password_reset' as password_reset_url %}
+    <div class="mb-3">
+      <div class="password-reset-link text-gray-dark pt-3" style="text-align: center; color: gray;">
+        <a href="{{ password_reset_url }}">
+          {% trans 'Забули пароль?' %}
+        </a>
       </div>
     </div>
   </form>

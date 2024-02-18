@@ -9,7 +9,7 @@ class UserManager(BaseUserManager):
 
     use_in_migrations = True
 
-    def _create_user(self, email, password, **extra_fields):
+    def _create_user(self, email, password, **extra_fields) -> "User":
         if not email:
             raise ValueError("The given email must be set")
 
@@ -20,7 +20,7 @@ class UserManager(BaseUserManager):
 
         return user
 
-    def create_user(self, email, password=None, **extra_fields):
+    def create_user(self, email, password=None, **extra_fields) -> "User":
         if self.model.objects.exists():
             raise ValueError("No additional users can be created.")
 
@@ -29,11 +29,7 @@ class UserManager(BaseUserManager):
 
         return self._create_user(email, password, **extra_fields)
 
-    def create_superuser(self, email, password, **extra_fields):
-        if self.model.objects.exists():
-            raise ValueError(
-                "Admin user already exists. No additional users can be created."
-            )
+    def create_superuser(self, email, password, **extra_fields) -> "User":
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
 

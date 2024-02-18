@@ -21,6 +21,7 @@ from django.urls import path, include
 from drf_spectacular.views import SpectacularSwaggerView, SpectacularAPIView
 
 urlpatterns = [
+    path("user-admin/", include("user.urls", namespace="user")),
     path("admin/", admin.site.urls),
     path(
         "api/content_management/",

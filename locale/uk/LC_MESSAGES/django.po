@@ -121,11 +121,11 @@ msgstr ""
 
 #: templates/admin/base.html:188
 msgid "See Profile"
-msgstr ""
+msgstr "Дивитися профіль"
 
 #: templates/admin/base.html:232
 msgid "Dashboard"
-msgstr "Дошка"
+msgstr "Панель керування"
 
 #: templates/admin/base.html:346
 msgid "Jazzmin version"
