@@ -32,17 +32,13 @@ class Migration(migrations.Migration):
                     "email",
                     models.EmailField(
                         max_length=254,
-                        validators=[
-                            validators.form_validation.validate_email_domain
-                        ],
+                        validators=[validators.form_validation.validate_email_domain],
                     ),
                 ),
                 (
                     "phone_number",
                     models.CharField(
-                        validators=[
-                            validators.form_validation.validate_phone_number
-                        ]
+                        validators=[validators.form_validation.validate_phone_number]
                     ),
                 ),
                 (
