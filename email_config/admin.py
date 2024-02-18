@@ -9,7 +9,6 @@ class EmailSettingsAdmin(admin.ModelAdmin):
         "host",
         "port",
         "host_user",
-        "host_password",
     )
     list_editable = ("host", "port", "host_user", "host_password")
     readonly_fields = ("backend", "use_tls", "use_ssl")
