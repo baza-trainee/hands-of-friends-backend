@@ -26,6 +26,9 @@ urlpatterns = [
         "api/content_management/",
         include("content_management.urls", namespace="content_management"),
     ),
+    path(
+        "api/collaboration/", include("collaboration.urls", namespace="collaboration")
+    ),
     path("api/", include("feedback.urls", namespace="feedback")),
     path("api/doc/", SpectacularAPIView.as_view(), name="schema"),
     path(

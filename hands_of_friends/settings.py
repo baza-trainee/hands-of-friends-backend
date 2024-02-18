@@ -56,9 +56,11 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "corsheaders",
     "ckeditor",
+    "import_export",
     "user",
     "content_management",
     "feedback",
+    "collaboration",
     "django_cleanup.apps.CleanupConfig",  # Must be the last one in the list
 ]
 

@@ -1,0 +1,175 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-18 11:28+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != "
+"11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % "
+"100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
+"(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+
+#: collaboration/apps.py:8
+msgid "Collaboration"
+msgstr "Відповіді з форм cпівпраці"
+
+#: collaboration/models.py:11 collaboration/models.py:32
+msgid "Organization Name"
+msgstr "Назва організації"
+
+#: collaboration/models.py:13 collaboration/models.py:34
+msgid "Representative Name"
+msgstr "Імʼя представника"
+
+#: collaboration/models.py:15 collaboration/models.py:36
+#: collaboration/models.py:55
+msgid "Email"
+msgstr "Email"
+
+#: collaboration/models.py:17 collaboration/models.py:38
+#: collaboration/models.py:57
+msgid "Phone"
+msgstr "Номер телефону"
+
+#: collaboration/models.py:19 collaboration/models.py:40
+#: collaboration/models.py:59
+msgid "Message"
+msgstr "Повідомлення"
+
+#: collaboration/models.py:20 collaboration/models.py:41
+#: collaboration/models.py:60
+msgid "Sent at"
+msgstr "Дата отримання"
+
+#: collaboration/models.py:24
+msgid "Partner form"
+msgstr "Запит партнера"
+
+#: collaboration/models.py:25
+msgid "Partners forms"
+msgstr "Запити партнерів"
+
+#: collaboration/models.py:28 collaboration/models.py:49
+#, python-brace-format
+msgid "Feedback from {self.organization_name} at {self.sent_at}"
+msgstr "Зворотний звʼязок від {self.organization_name} о {self.sent_at}"
+
+#: collaboration/models.py:45
+msgid "Donor form"
+msgstr "Запит донора"
+
+#: collaboration/models.py:46
+msgid "Donor forms"
+msgstr "Запити донорів"
+
+#: collaboration/models.py:53
+msgid "Name"
+msgstr "Імʼя"
+
+#: collaboration/models.py:54
+msgid "City"
+msgstr "Місто"
+
+#: collaboration/models.py:64
+msgid "Volunteer form"
+msgstr "Запит волонтера"
+
+#: collaboration/models.py:65
+msgid "Volunteer forms"
+msgstr "Запити волонтерів"
+
+#: collaboration/models.py:68
+#, python-brace-format
+msgid "Feedback from {self.name} at {self.sent_at}"
+msgstr "Зворотний звʼязок від {self.name} о {self.sent_at}"
+
+#: hands_of_friends/settings.py:138
+msgid "Ukrainian"
+msgstr "Українська"
+
+#: hands_of_friends/settings.py:139
+msgid "English"
+msgstr "Англійська"
+
+#: templates/admin/base.html:104 templates/admin/base.html:105
+msgid "Search"
+msgstr "Пошук"
+
+#: templates/admin/base.html:166
+msgid "Account"
+msgstr "Обліковий запис"
+
+#: templates/admin/base.html:169
+msgid "Change password"
+msgstr "Змінити пароль"
+
+#: templates/admin/base.html:175
+msgid "Log out"
+msgstr ""
+
+#: templates/admin/base.html:188
+msgid "See Profile"
+msgstr ""
+
+#: templates/admin/base.html:232
+msgid "Dashboard"
+msgstr "Дошка"
+
+#: templates/admin/base.html:346
+msgid "Jazzmin version"
+msgstr ""
+
+#: templates/admin/base.html:349
+msgid "Copyright"
+msgstr ""
+
+#: templates/admin/base.html:350
+msgid "All rights reserved."
+msgstr ""
+
+#: templates/admin/base.html:366
+msgid "UI Configuration"
+msgstr ""
+
+#: templates/admin/base.html:370
+msgid "Copy this info your settings file to persist these UI changes"
+msgstr ""
+
+#: templates/admin/base.html:375
+msgid "Close"
+msgstr ""
+
+#: templates/admin/login.html:15
+#, python-format
+msgid ""
+"You are authenticated as %(username)s, but are not authorized to access this "
+"page. Would you like to login to a different account?"
+msgstr ""
+
+#: templates/admin/login.html:63
+msgid "Forgotten your password?"
+msgstr ""
+
+#: templates/admin/login.html:71
+msgid "Log in"
+msgstr ""
+
+#: templates/registration/logged_out.html:8
+msgid "Thanks for spending some quality time with the Web site today."
+msgstr ""
+
+#: templates/registration/logged_out.html:11
+msgid "Log in again"
+msgstr ""
