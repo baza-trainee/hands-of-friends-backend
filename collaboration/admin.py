@@ -1,10 +1,11 @@
 from django.contrib import admin
+from import_export.admin import ImportExportModelAdmin
 
 from collaboration.models import DonorForm, PartnerForm, VolunteerForm
 
 
 @admin.register(PartnerForm)
-class PartnerFormAdmin(admin.ModelAdmin):
+class PartnerFormAdmin(ImportExportModelAdmin):
     list_display = ("organization_name", "message", "sent_at")
     list_display_links = ("organization_name", "message", "sent_at")
     search_fields = ("organization_name", "sent_at")
@@ -31,7 +32,7 @@ class PartnerFormAdmin(admin.ModelAdmin):
 
 
 @admin.register(DonorForm)
-class DonorFormAdmin(admin.ModelAdmin):
+class DonorFormAdmin(ImportExportModelAdmin):
     list_display = ("organization_name", "message", "sent_at")
     list_display_links = ("organization_name", "message", "sent_at")
     search_fields = ("organization_name", "sent_at")
@@ -58,7 +59,7 @@ class DonorFormAdmin(admin.ModelAdmin):
 
 
 @admin.register(VolunteerForm)
-class VolunteerFormAdmin(admin.ModelAdmin):
+class VolunteerFormAdmin(ImportExportModelAdmin):
     list_display = ("name", "phone", "message", "sent_at")
     list_display_links = ("name", "phone", "message", "sent_at")
     search_fields = ("name", "sent_at")

@@ -42,8 +42,8 @@ class DonorForm(models.Model):
 
     class Meta:
         ordering = ("-sent_at",)
-        verbose_name = _("Partner form")
-        verbose_name_plural = _("Partners forms")
+        verbose_name = _("Donor form")
+        verbose_name_plural = _("Donor forms")
 
     def __str__(self) -> str:
         return str(_(f"Feedback from {self.organization_name} at {self.sent_at}"))
@@ -61,8 +61,8 @@ class VolunteerForm(models.Model):
 
     class Meta:
         ordering = ("-sent_at",)
-        verbose_name = _("Partner form")
-        verbose_name_plural = _("Partners forms")
+        verbose_name = _("Volunteer form")
+        verbose_name_plural = _("Volunteer forms")
 
     def __str__(self) -> str:
         return str(_(f"Feedback from {self.name} at {self.sent_at}"))

@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "corsheaders",
     "ckeditor",
+    "import_export",
     "user",
     "content_management",
     "feedback",
