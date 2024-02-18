@@ -50,6 +50,19 @@ CORS_ALLOWED_ORIGINS=<your frontend url>,<your frontend url>
 python manage.py migrate
 python manage.py runserver
 ```
+## How to create admin user
+Got to the terminal and run the following command
+# Create a superuser
+```shell
+python manage.py createsuperuser
+```
+```
+# Enter your desired email and press enter.
+email:
+# Enter your desired password and press enter.
+password:
+password:
+```
 
 ## Execution with Docker
 
