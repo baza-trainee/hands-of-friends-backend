@@ -68,7 +68,11 @@ class TenderViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVie
     def get_queryset(self):
         queryset = super().get_queryset()
 
-        queryset.filter(end_date__lt=timezone.now()).update(is_active=False)
+        end_date = self.request.query_params.get("end_date", None)
+        if end_date is not None:
+            queryset = queryset.filter(
+                end_date__lt=timezone.now().update(is_active=False)
+            )
 
         is_active = self.request.query_params.get("is_active", None)
         is_shown = self.request.query_params.get("is_shown", None)
@@ -122,7 +126,11 @@ class ProjectViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, GenericVi
     def get_queryset(self):
         queryset = super().get_queryset()
 
-        queryset.filter(end_date__lt=timezone.now()).update(is_active=False)
+        end_date = self.request.query_params.get("end_date", None)
+        if end_date is not None:
+            queryset = queryset.filter(
+                end_date__lt=timezone.now().update(is_active=False)
+            )
 
         is_active = self.request.query_params.get("is_active", None)
         is_shown = self.request.query_params.get("is_shown", None)
