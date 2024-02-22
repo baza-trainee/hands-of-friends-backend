@@ -32,7 +32,6 @@ class TenderAdmin(TranslationAdmin):
     list_display = ("title", "start_date", "end_date", "is_shown")
     list_filter = ("title", "start_date", "end_date")
     exclude = ("is_active",)
-    search_fields = ("title", "date")
     group_fieldsets = True
 
 
