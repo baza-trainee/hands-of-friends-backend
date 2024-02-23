@@ -104,7 +104,7 @@ class HeroSliderAdmin(TranslationAdmin, ImageAdminMixin):
     list_display = ("title", "image_tag")
 
     def has_add_permission(self, request, obj=None):
-        if HeroSlider.objects.count() >= 5:
+        if HeroSlider.objects.count() == 1:
             return False
         return True
 
