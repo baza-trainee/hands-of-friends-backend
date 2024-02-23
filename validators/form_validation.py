@@ -12,8 +12,6 @@ def validate_email_domain(email: str) -> None:
 
 
 def validate_name(name: str) -> str:
-    if not re.match(r"^[A-Za-z\s'-]+$", name):
-        raise ValidationError(_("Name must contain only letters, spaces, or hyphens."))
 
     if len(name) < 2:
         raise ValidationError(_("Name must be at least 2 characters long."))
