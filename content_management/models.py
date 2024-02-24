@@ -266,7 +266,7 @@ class News(models.Model):
         max_length=100, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_100
     )
     description = RichTextField(
-        max_length=1000,
+        max_length=1600,
         verbose_name=_("Description"),
         help_text=TEXT_LENGTH_HELP_TEXT_1000,
     )
