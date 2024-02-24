@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-18 18:13+0000\n"
+"POT-Creation-Date: 2024-02-24 08:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,7 +66,7 @@ msgid "Максимальна довжина тексту: 500 символів.
 msgstr ""
 
 #: content_management/help_texts.py:27
-msgid "Максимальна довжина тексту: 1000 символів."
+msgid "Максимальна довжина тексту: 1600 символів."
 msgstr ""
 
 #: content_management/help_texts.py:28

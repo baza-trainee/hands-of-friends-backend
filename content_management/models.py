@@ -17,7 +17,7 @@ from content_management.help_texts import (
     TEXT_LENGTH_HELP_TEXT_100,
     TEXT_LENGTH_HELP_TEXT_200,
     TEXT_LENGTH_HELP_TEXT_500,
-    TEXT_LENGTH_HELP_TEXT_1000,
+    TEXT_LENGTH_HELP_TEXT_1600,
     TEXT_LENGTH_HELP_TEXT_2500,
     IS_SHOWN_HELP_TEXT,
     IMAGE_HELP_TEXT_NO_COMPRESSION,
@@ -268,7 +268,7 @@ class News(models.Model):
     description = RichTextField(
         max_length=1600,
         verbose_name=_("Description"),
-        help_text=TEXT_LENGTH_HELP_TEXT_1000,
+        help_text=TEXT_LENGTH_HELP_TEXT_1600,
     )
     added_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Added At"))
 
