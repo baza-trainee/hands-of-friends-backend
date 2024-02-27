@@ -111,6 +111,7 @@ class HeroSliderAdmin(TranslationAdmin, ImageAdminMixin):
     def has_delete_permission(self, request, obj=None):
         if HeroSlider.objects.count() <= 1:
             return False
+        return True
 
 
 @admin.register(AboutUs)
