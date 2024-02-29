@@ -5,7 +5,7 @@ from feedback.models import FeedbackForm
 
 @admin.register(FeedbackForm)
 class FeedbackFormAdmin(admin.ModelAdmin):
-    list_display = ("name", "email", "phone_number", "message", "sent_at")
+    list_display = ("name", "email", "phone", "message", "sent_at")
 
     def has_add_permission(self, request) -> bool:
         return False
