@@ -97,6 +97,9 @@ class Project(models.Model):
         return f"{self.title}"
 
     def clean(self):
+        if self.start_date and self.end_date and self.start_date > self.end_date:
+            raise ValidationError(_("Start date cannot be after end date."))
+
         try:
             validate_and_convert_image(self.image)
         except ValidationError as e:

@@ -12,7 +12,6 @@ def validate_email_domain(email: str) -> None:
 
 
 def validate_name(name: str) -> str:
-
     if len(name) < 2:
         raise ValidationError(_("Name must be at least 2 characters long."))
 
