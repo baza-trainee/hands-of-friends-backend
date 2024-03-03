@@ -75,7 +75,7 @@ class Project(models.Model):
         max_length=200, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_200
     )
     description = RichTextField(
-        max_length=500,
+        max_length=600,
         verbose_name=_("Short Description"),
         help_text=TEXT_LENGTH_HELP_TEXT_500,
     )
