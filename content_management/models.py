@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext as _
 
 from content_management.upload_to_path import UploadToPath
@@ -64,6 +65,14 @@ class Tender(models.Model):
         if self.start_date and self.end_date and self.start_date > self.end_date:
             raise ValidationError(_("Start date cannot be after end date."))
 
+    def save(self, *args, **kwargs):
+        if self.end_date and self.end_date > timezone.now().date():
+            self.is_active = True
+        else:
+            self.is_active = False
+        self.full_clean()
+        super().save(*args, **kwargs)
+
 
 class Project(models.Model):
     image = models.FileField(
@@ -107,6 +116,10 @@ class Project(models.Model):
         super().clean()
 
     def save(self, *args, **kwargs):
+        if self.end_date and self.end_date > timezone.now().date():
+            self.is_active = True
+        else:
+            self.is_active = False
         self.full_clean()
         super().save(*args, **kwargs)
 
