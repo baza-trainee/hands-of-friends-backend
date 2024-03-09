@@ -3,16 +3,20 @@ LABEL maintainer="olena.liuby@gmail.com"
 
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR app/
+WORKDIR /app/
 
 COPY requirements.txt requirements.txt
 
-RUN apt-get update \
-    && apt-get -y install libpq-dev gcc
+RUN apt-get update && \
+    apt-get -y install libpq-dev gcc gettext && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN pip install -r requirements.txt
 
 COPY . .
+
+RUN python manage.py compilemessages
 
 RUN python manage.py collectstatic --noinput
 
