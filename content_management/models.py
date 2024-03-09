@@ -16,6 +16,7 @@ from content_management.help_texts import (
     IMAGE_HELP_TEXT,
     PDF_HELP_TEXT,
     TEXT_LENGTH_HELP_TEXT_100,
+    TEXT_LENGTH_HELP_TEXT_120,
     TEXT_LENGTH_HELP_TEXT_200,
     TEXT_LENGTH_HELP_TEXT_500,
     TEXT_LENGTH_HELP_TEXT_1600,
@@ -358,7 +359,7 @@ class PDFReport(models.Model):
 
 class HeroSlider(models.Model):
     title = models.CharField(
-        max_length=200, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_200
+        max_length=120, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_120
     )
     image = models.FileField(
         upload_to=UploadToPath("hero-slider/"),
