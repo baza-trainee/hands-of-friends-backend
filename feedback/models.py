@@ -12,7 +12,7 @@ class FeedbackForm(models.Model):
     email = models.EmailField(
         validators=[validate_email_domain], verbose_name=_("Email")
     )
-    phone_number = models.CharField(
+    phone = models.CharField(
         validators=[validate_phone_number], verbose_name=_("Phone number")
     )
     message = models.TextField(max_length=300, verbose_name=_("Message"))

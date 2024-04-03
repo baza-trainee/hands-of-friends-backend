@@ -70,7 +70,7 @@ def send_feedback_email(sender, instance, created, **kwargs):
             f"Деталі:\n"
             f"Імʼя: {instance.name}\n"
             f"Email: {instance.email}\n"
-            f"Телефон: {instance.phone_number}\n"
+            f"Телефон: {instance.phone}\n"
             f"Повідомлення: {instance.message}\n"
             f"Форму відправлено: {formatted_sent_at}"
         )

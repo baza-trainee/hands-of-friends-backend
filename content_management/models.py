@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext as _
 
 from content_management.upload_to_path import UploadToPath
@@ -15,9 +16,10 @@ from content_management.help_texts import (
     IMAGE_HELP_TEXT,
     PDF_HELP_TEXT,
     TEXT_LENGTH_HELP_TEXT_100,
+    TEXT_LENGTH_HELP_TEXT_120,
     TEXT_LENGTH_HELP_TEXT_200,
     TEXT_LENGTH_HELP_TEXT_500,
-    TEXT_LENGTH_HELP_TEXT_1000,
+    TEXT_LENGTH_HELP_TEXT_1600,
     TEXT_LENGTH_HELP_TEXT_2500,
     IS_SHOWN_HELP_TEXT,
     IMAGE_HELP_TEXT_NO_COMPRESSION,
@@ -44,7 +46,7 @@ class Tender(models.Model):
     )
     description = RichTextField(verbose_name=_("Description"))
     start_date = models.DateField(verbose_name=_("Start Date"))
-    end_date = models.DateField(null=True, blank=True, verbose_name=_("End Date"))
+    end_date = models.DateField(verbose_name=_("End Date"))
     is_active = models.BooleanField(default=True, verbose_name=_("Is Active"))
     is_shown = models.BooleanField(
         default=True, verbose_name=_("Is Shown"), help_text=IS_SHOWN_HELP_TEXT
@@ -64,6 +66,14 @@ class Tender(models.Model):
         if self.start_date and self.end_date and self.start_date > self.end_date:
             raise ValidationError(_("Start date cannot be after end date."))
 
+    def save(self, *args, **kwargs):
+        if self.end_date and self.end_date > timezone.now().date():
+            self.is_active = True
+        else:
+            self.is_active = False
+        self.full_clean()
+        super().save(*args, **kwargs)
+
 
 class Project(models.Model):
     image = models.FileField(
@@ -75,7 +85,7 @@ class Project(models.Model):
         max_length=200, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_200
     )
     description = RichTextField(
-        max_length=500,
+        max_length=600,
         verbose_name=_("Short Description"),
         help_text=TEXT_LENGTH_HELP_TEXT_500,
     )
@@ -97,6 +107,9 @@ class Project(models.Model):
         return f"{self.title}"
 
     def clean(self):
+        if self.start_date and self.end_date and self.start_date > self.end_date:
+            raise ValidationError(_("Start date cannot be after end date."))
+
         try:
             validate_and_convert_image(self.image)
         except ValidationError as e:
@@ -104,6 +117,12 @@ class Project(models.Model):
         super().clean()
 
     def save(self, *args, **kwargs):
+        if (
+            self.end_date and self.end_date > timezone.now().date()
+        ) or self.end_date is None:
+            self.is_active = True
+        else:
+            self.is_active = False
         self.full_clean()
         super().save(*args, **kwargs)
 
@@ -266,9 +285,9 @@ class News(models.Model):
         max_length=100, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_100
     )
     description = RichTextField(
-        max_length=1000,
+        max_length=1600,
         verbose_name=_("Description"),
-        help_text=TEXT_LENGTH_HELP_TEXT_1000,
+        help_text=TEXT_LENGTH_HELP_TEXT_1600,
     )
     added_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Added At"))
 
@@ -340,7 +359,7 @@ class PDFReport(models.Model):
 
 class HeroSlider(models.Model):
     title = models.CharField(
-        max_length=200, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_200
+        max_length=120, verbose_name=_("Title"), help_text=TEXT_LENGTH_HELP_TEXT_120
     )
     image = models.FileField(
         upload_to=UploadToPath("hero-slider/"),

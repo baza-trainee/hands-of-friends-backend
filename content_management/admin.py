@@ -32,7 +32,6 @@ class TenderAdmin(TranslationAdmin):
     list_display = ("title", "start_date", "end_date", "is_shown")
     list_filter = ("title", "start_date", "end_date")
     exclude = ("is_active",)
-    search_fields = ("title", "date")
     group_fieldsets = True
 
 
@@ -112,6 +111,7 @@ class HeroSliderAdmin(TranslationAdmin, ImageAdminMixin):
     def has_delete_permission(self, request, obj=None):
         if HeroSlider.objects.count() <= 1:
             return False
+        return True
 
 
 @admin.register(AboutUs)

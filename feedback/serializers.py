@@ -13,7 +13,7 @@ class FeedbackFormSerializer(serializers.ModelSerializer):
             "id",
             "name",
             "email",
-            "phone_number",
+            "phone",
             "message",
             "sent_at",
         )
