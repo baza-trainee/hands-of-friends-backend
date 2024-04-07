@@ -32,16 +32,22 @@ SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DJANGO_DEBUG", "") == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,0.0.0.0").split(",")
+
+# CORS
+default_origins = "http://localhost:8000"
+
+CORS_ALLOWED_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get("CORS_ALLOWED_ORIGINS", default_origins).split(",")
+    if origin.strip()
+]
+
 
 # Adding Render hostname to allowed hosts
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
 
 # Application definition
 
@@ -192,11 +198,6 @@ SPECTACULAR_SETTINGS = {
         "defaultModelExpandDepth": 2,
     },
 }
-
-# CORS
-# TODO: Change to specific origins in production
-# CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
-CORS_ALLOW_ALL_ORIGINS = True
 
 EMAIL_BACKEND = "email_config.backends.CustomEmailBackend"
 
