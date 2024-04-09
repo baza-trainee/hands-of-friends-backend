@@ -1,33 +1,49 @@
-version: "3"
+version: "3.9"
 
 services:
-  app:
-    build:
-      context: .
-    ports:
-      - "8000:8000"
+ db:
+    image: postgres:14-alpine
     volumes:
-      - ./:/app
-    command: >
-      sh -c "
-      python manage.py wait_for_db && 
-      python manage.py migrate &&
-      python manage.py runserver 0.0.0.0:8000 &&
-      python manage.py compilemessages --ignore=venv
-      "
+      - hands_of_friends_postgres:/var/lib/postgresql/data
     env_file:
       - .env
+    ports:
+      - "${POSTGRES_HOST_PORT}:${POSTGRES_CONTAINER_PORT}"
+
+ app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: >
+      sh -c "
+        python manage.py wait_for_db &&
+        python manage.py migrate &&
+        python manage.py collectstatic --no-input &&  
+        python manage.py compilemessages --ignore=venv &&
+        gunicorn hands_of_friends.wsgi:application --bind 0.0.0.0:8000
+      "
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
     depends_on:
       - db
 
-  db:
-    image: postgres:14-alpine
+ nginx:
+    build: ./nginx
     volumes:
-      - hands_of_friends_postgres:/var/lib/postgresql/data/
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
     ports:
-      - "5433:5432"
-    env_file:
-      - .env
+      - "80:80"
+    depends_on:
+      - app
 
 volumes:
-  hands_of_friends_postgres:
+ hands_of_friends_postgres:
+ static_volume:
+ media_volume:
