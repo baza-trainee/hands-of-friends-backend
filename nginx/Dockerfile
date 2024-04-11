@@ -15,4 +15,4 @@ ENV NGINX_ENVSUBST_OUTPUT_DIR=/tmp/nginx/conf.d
 USER nginxuser
 
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
- CMD curl --fail http://localhost:80/ || exit 1
+ CMD curl --fail http://localhost:8080/admin/ || exit 1
