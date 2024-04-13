@@ -35,14 +35,34 @@ Make a copy of .env.sample file and rename it to .env
 ```shell
 # Set up environmental variables for Postgres and your secret key
 
-POSTGRES_HOST=<your db hostname>
-POSTGRES_DB=<your db name>
-POSTGRES_USER=<your db username>
-POSTGRES_PASSWORD=<your db user password>
+# Environment variables for Django project
+POSTGRES_HOST=POSTGRES_HOST
+POSTGRES_DB=POSTGRES_DB
+POSTGRES_USER=POSTGRES_USER
+POSTGRES_PASSWORD=POSTGRES_USER
+POSTGRES_HOST_PORT=POTGRES_HOST_PORT
+POSTGRES_CONTAINER_PORT=POSTGRES_CONTAINER_PORT
 
-DJANGO_SECRET_KEY=<your secret key>
-DJANGO_DEBUG=<True or False>
-CORS_ALLOWED_ORIGINS=<your frontend url>,<your frontend url>
+# Django settings
+DJANGO_SECRET_KEY=DJANGO_SECRET_KEY
+DJANGO_DEBUG=True
+SECURE_SSL_REDIRECT=False
+
+# Allowed hosts
+DJANGO_ALLOWED_HOSTS=https://example.com,https://www.another.com
+CORS_ALLOWED_ORIGINS=https://example.com,https://www.another.com
+CSRF_TRUSTED_ORIGINS=https://example.com,https://www.another.com
+
+# MEDIA settings
+MEDIA_URL=/media/
+
+# Email settings
+EMAIL_BACKEND =django.core.mail.backends.smtp.EmailBackend
+EMAIL_HOST =smtp.gmail.com
+EMAIL_PORT =587
+EMAIL_USE_TLS =True
+EMAIL_HOST_USER ="example@gmail.com"
+EMAIL_HOST_PASSWORD ="password"
 ```
 
 ```shell
